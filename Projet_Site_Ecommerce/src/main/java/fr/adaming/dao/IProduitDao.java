@@ -21,6 +21,6 @@ public interface IProduitDao {
 	public Produit rechercherProduit(Long id);
 	
 	// LISTE PAR CATEGORIE
-	public List<Produit> ProduitByCategorie(Long id);
+	public List<Produit> produitByCategorie(Long id);
 
 }

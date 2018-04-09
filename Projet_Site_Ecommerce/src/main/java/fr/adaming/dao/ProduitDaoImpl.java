@@ -6,9 +6,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Produit;
 
+@Repository
 public class ProduitDaoImpl implements IProduitDao {
 	@Autowired
 	private SessionFactory sf;
@@ -51,9 +53,9 @@ public class ProduitDaoImpl implements IProduitDao {
 		Session s = sf.getCurrentSession();
 
 		// Requete HQL
-		String req = "UPDATE Produit p SET p.nomproduit = :pNomP, p.description = :pDescr, "
-				+ "p.prix = pPrix, p.quantite = :pQuant, p.selectionne = :pSel, "
-				+ "p.photo = pPhoto WHERE p.id = :pId";
+		String req = "UPDATE Produit p SET p.nomProduit = :pNomP, p.description = :pDescr, "
+				+ "p.prix = :pPrix, p.quantite = :pQuant, p.selectionne = :pSel, "
+				+ "p.photo = :pPhoto WHERE p.id = :pId";
 
 		// Créer le query
 		Query query = s.createQuery(req);
@@ -62,6 +64,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter("pNomP", prod.getNomProduit());
 		query.setParameter("pDescr", prod.getDescription());
 		query.setParameter("pPrix", prod.getPrix());
+		query.setParameter("pQuant", prod.getQuantite());
 		query.setParameter("pSel", prod.isSelectionne());
 		query.setParameter("pPhoto", prod.getPhoto());
 		query.setParameter("pId", prod.getId());
@@ -104,7 +107,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	}
 
 	@Override
-	public List<Produit> ProduitByCategorie(Long id) {
+	public List<Produit> produitByCategorie(Long id) {
 		// Ouvrir une session
 		Session s = sf.getCurrentSession();
 

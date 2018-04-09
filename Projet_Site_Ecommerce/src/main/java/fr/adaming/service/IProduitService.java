@@ -19,4 +19,7 @@ public interface IProduitService {
 
 	// RECHERCHER UN PRODUIT
 	public Produit rechercherProduit(Long id);
+	
+	// Liste par catégorie
+	public List<Produit> produitByCategorie(Long id);
 }
