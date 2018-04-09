@@ -1,5 +1,7 @@
 package fr.adaming.dao;
 
-public interface IAdminDao {
+import fr.adaming.model.Admin;
 
+public interface IAdminDao {
+	public Admin isExist(Admin a);
 }

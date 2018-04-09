@@ -1,4 +1,6 @@
-C:\Users\inti0331\Desktop\Formation\Workspaces\06_Spring\Projet_Site_Ecommerce\src\main\java\fr\adaming\model\Admin.java
-C:\Users\inti0331\Desktop\Formation\Workspaces\06_Spring\Projet_Site_Ecommerce\src\main\java\fr\adaming\service\IAdminService.java
-C:\Users\inti0331\Desktop\Formation\Workspaces\06_Spring\Projet_Site_Ecommerce\src\main\java\fr\adaming\dao\IAdminDao.java
-C:\Users\inti0331\Desktop\Formation\Workspaces\06_Spring\Projet_Site_Ecommerce\src\main\java\fr\adaming\managedBeans\AdminManagedBean.java
+C:\Users\inti0343\git\projet_site_ecommerce_fsv\Projet_Site_Ecommerce\src\main\java\fr\adaming\dao\IAdminDao.java
+C:\Users\inti0343\git\projet_site_ecommerce_fsv\Projet_Site_Ecommerce\src\main\java\fr\adaming\managedBeans\AdminManagedBean.java
+C:\Users\inti0343\git\projet_site_ecommerce_fsv\Projet_Site_Ecommerce\src\main\java\fr\adaming\model\Admin.java
+C:\Users\inti0343\git\projet_site_ecommerce_fsv\Projet_Site_Ecommerce\src\main\java\fr\adaming\dao\AdminDaoImpl.java
+C:\Users\inti0343\git\projet_site_ecommerce_fsv\Projet_Site_Ecommerce\src\main\java\fr\adaming\service\IAdminService.java
+C:\Users\inti0343\git\projet_site_ecommerce_fsv\Projet_Site_Ecommerce\src\main\java\fr\adaming\service\AdminServiceImpl.java
