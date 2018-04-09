@@ -19,5 +19,8 @@ public interface IProduitDao {
 
 	// RECHERCHER UN PRODUIT
 	public Produit rechercherProduit(Long id);
+	
+	// LISTE PAR CATEGORIE
+	public List<Produit> ProduitByCategorie(Long id);
 
 }
