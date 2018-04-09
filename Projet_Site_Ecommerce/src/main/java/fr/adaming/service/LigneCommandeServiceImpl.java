@@ -3,12 +3,16 @@ package fr.adaming.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.ILigneCommandeDao;
 import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 
+@Service("lcService")
+@Transactional
 public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	@Autowired
 	private ILigneCommandeDao lcDao;
@@ -30,7 +34,6 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 		Produit produit = prodDao.rechercherProduit(id_prod);
 
 		if (produit != null) {
-
 			lc.setProduit(produit);
 
 			LigneCommande lc2 = lcDao.isExist(lc);
@@ -42,13 +45,13 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 				if (lc.getQuantite() <= 0) {
 					return lcDao.supprimerLC(lc2);
 				} else {
+					// Le produit est présent dans le panier - modifier
 					lc.setPrix(produit.getPrix() * lc.getQuantite());
-
-					System.out.println(lc.getPrix());
 
 					return lcDao.modifierLC(lc);
 				}
 			} else if (lc.getQuantite() != 0) {
+				// Le produit n'existe pas encore dans le panier 
 				lc.setPrix(produit.getPrix() * lc.getQuantite());
 				return lcDao.ajouterLC(lc);
 			}

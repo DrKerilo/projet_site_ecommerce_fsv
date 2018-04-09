@@ -1,10 +1,10 @@
-package fr.adaming.dao;
+package fr.adaming.service;
 
 import java.util.List;
 
 import fr.adaming.model.Produit;
 
-public interface IProduitDao {
+public interface IProduitService {
 	// AJOUTER UN PRODUIT
 	public Produit addProduit(Produit prod);
 
@@ -19,5 +19,4 @@ public interface IProduitDao {
 
 	// RECHERCHER UN PRODUIT
 	public Produit rechercherProduit(Long id);
-
 }
