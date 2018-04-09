@@ -1,13 +1,16 @@
 package fr.adaming.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,6 +32,8 @@ public class Categorie implements Serializable {
 	
 	// Transformation de l'association UML en Java
 	// OneToMany avec Produit (si on supprime une catégorie, on supprime les produits à l'intérieur)
+	@OneToMany(mappedBy="categorie", cascade=CascadeType.REMOVE)
+	private List<Produit> listeProduits;
 	
 	// Constructeurs
 	public Categorie() {
@@ -78,6 +83,12 @@ public class Categorie implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
 	}
 	
 }
