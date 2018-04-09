@@ -1,0 +1,4 @@
+fr\adaming\service\IAdminService.class
+fr\adaming\dao\IAdminDao.class
+fr\adaming\managedBeans\AdminManagedBean.class
+fr\adaming\model\Admin.class
