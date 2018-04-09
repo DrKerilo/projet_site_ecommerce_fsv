@@ -7,7 +7,6 @@ import javax.persistence.Query;
 
 import fr.adaming.model.LigneCommande;
 
-@Local
 public interface ILigneCommandeDao {
 	public int ajouterLC(LigneCommande lc);
 	
