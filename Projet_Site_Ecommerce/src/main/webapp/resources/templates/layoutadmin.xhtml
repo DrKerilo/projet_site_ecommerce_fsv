@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<title>Layout Back Office</title>
+<h:outputStylesheet library="css" name="customStyle.css"/>
+</h:head>
+<h:body styleClass="lay-admin">
+<!-- Mise en place du header -->
+<ui:insert name="headerAdmin">
+	<ui:include src="/resources/templates/headeradmin.xhtml"></ui:include>
+</ui:insert>
+
+<!-- Mise en place du body et de son style -->
+<div class="body-admin">
+<ui:insert name="bodyAdmin">
+	<ui:include src="/resources/templates/bodyadmin.xhtml"></ui:include>
+</ui:insert>
+</div>
+
+<!-- Mise en place du footer et de son style -->
+<div style="text-align:right;margin-top:20px;border-radius:4px;padding:15px;background-color:#f6a828;border:1px solid #F77A10">
+<ui:insert name="footerAdmin">
+	<ui:include src="/resources/templates/footeradmin.xhtml"></ui:include>
+</ui:insert>
+</div>
+</h:body>
+</html>
