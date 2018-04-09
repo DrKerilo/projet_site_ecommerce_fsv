@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Header Administration</title>
+</h:head>
+<h:body>
+
+	<!-- Définition du contenu du header grâce à la balise ui:composition -->
+	<ui:composition>
+		<div
+			style="width: 450px; margin-left: auto; margin-right: auto; margin-top: 20px; text-align: center">
+			<a href="accueil.xhtml"><h:graphicImage library="images"
+					name="logoOriga.jpg" /></a>
+		</div>
+		<h:form>
+			<p:growl id="messages" />
+
+			<p:menubar
+				style="padding:10px;background:#f6a828;border:1px solid #F77A10">
+
+				<p:menuitem value="Gestion du magasin" url="espaceAdmin.xhtml"
+					icon="ui-icon-gear" />
+
+				<p:menuitem value="Ajouter un nouvel élément" url="ajoutadmin.xhtml"
+					icon="ui-icon-plusthick" />
+
+				<f:facet name="options">
+					<!-- Déconnexion et retour au front office -->
+					<p:commandButton value="Déconnexion: retour au magasin"
+						icon="ui-icon-home" action="#{adminMB.seDeconnecter}"
+						style="background:#E5EC9E;color:#333333" ajax="false"/>
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</ui:composition>
+
+</h:body>
+</html>

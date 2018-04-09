@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Footer Front Office</title>
+</h:head>
+<h:body>
+
+	<ui:composition>
+		<h:form>
+			<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
+				title="login" style="text-decoration:none;color:#333333;font-family:Century Gothic;font-weight:bold">
+				<span>Accès à l'espace administrateur</span>
+			</h:outputLink>
+
+			<p:growl id="growl" summary="true" life="3000" />
+
+			<p:dialog header="Authentification" widgetVar="dlg" resizable="false">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="username" value="Identifiant:" />
+					<p:inputText id="username" value="#{adminMB.admin.mail}"
+						required="true" label="username" />
+
+					<h:outputLabel for="password" value="Mot de passe:" />
+					<p:password id="password" value="#{adminMB.admin.mdp}"
+						required="true" label="password" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Se connecter en tant qu'administrateur" update="growl"
+							action="#{adminMB.seConnecter}" ajax="false"
+							oncomplete="handleLoginRequest(xhr, status, args)" />
+					</f:facet>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+
+		<script type="text/javascript">
+			function handleLoginRequest(xhr, status, args) {
+				if (args.validationFailed || !args.loggedIn) {
+					PF('dlg').jq.effect("bounce", {
+						times : 10
+					}, 100);
+				} else {
+		            PF('dlg').hide();
+		            $('#loginLink').fadeOut();
+		        }
+			}
+		</script>
+	</ui:composition>
+
+</h:body>
+</html>
