@@ -93,9 +93,9 @@ public class ProduitManagedBean implements Serializable {
 		produit.setPhoto(this.uf.getContents());
 		//TODO
 		cat = categorieService.getCategorieById(cat);
-		produit.setCategorie(cat);
+		
 
-		Produit prodOut = produitService.addProduit(produit);
+		Produit prodOut = produitService.addProduit(produit, categorie);
 
 		if (prodOut.getId() != 0) {
 			// TODO nom de la page

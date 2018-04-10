@@ -104,10 +104,10 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 		
 		// Requete HQL
-		String req;
+//		String req;
 
 		// Recuperer le query
-		Query query = s.createQuery(req);
+//		Query query = s.createQuery(req);
 		
 		// Passage des parametres
 
@@ -121,10 +121,10 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 
 		// Requete HQL
-		String req;
+//		String req;
 
 		// Recuperer le query
-		Query query = s.createQuery(req);
+//		Query query = s.createQuery(req);
 		
 		// Passage des parametres
 		// TODO Auto-generated method stub
