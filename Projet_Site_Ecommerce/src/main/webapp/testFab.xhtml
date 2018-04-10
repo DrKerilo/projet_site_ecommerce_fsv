@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page login</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<h:panelGrid columns="6">
+
+			<div class="form-group">
+				ID:
+				<h:inputText value="#{pMB.produit.id}" />
+
+
+				<h:commandButton value="supprimer " action="#{pMB.supprimerProd}" />
+				<!-- APPEL SE CONNECTER QUI DOIT APPELER LA METHODE SERVICE -->
+			</div>
+		</h:panelGrid>
+
+	</h:form>
+
+	<h:form enctype="multipart/form-data">
+
+
+		<h1>Ajouter un produit</h1>
+
+		<h:panelGrid columns="2">
+			<div class="form-group">
+				Designation:
+				<h:inputText value="#{pMB.produit.nomProduit}" />
+
+			</div>
+
+			<div class="form-group">
+				Description:
+				<h:inputText value="#{pMB.produit.description}" />
+			</div>
+
+			<div class="form-group">
+				Prix:
+				<h:inputText value="#{pMB.produit.prix}" />
+			</div>
+
+			<div class="form-group">
+				Quantité:
+				<h:inputText value="#{pMB.produit.quantite}" />
+			</div>
+
+			<div>
+				Photo:
+				<p:fileUpload value="#{pMB.uf}" mode="simple" />
+				<p:graphicImage value="#{pMB.produit.image}" />
+
+			</div>
+
+			<h:commandButton value="submit" ajax="false"
+				action="#{pMB.ajouterProd}" />
+
+		</h:panelGrid>
+	</h:form>
+
+	
+<!-- 	//modifier produit -->
+	
+	
+	<h:form enctype="multipart/form-data">
+
+
+		<h1>Ajouter un produit</h1>
+
+		<h:panelGrid columns="2">
+			<div class="form-group">
+				ID :
+				<h:inputText value="#{pMB.produit.id}" />
+
+			</div>
+			
+			<div class="form-group">
+				Designation:
+				<h:inputText value="#{pMB.produit.nomProduit}" />
+
+			</div>
+
+			<div class="form-group">
+				Description:
+				<h:inputText value="#{pMB.produit.description}" />
+			</div>
+
+			<div class="form-group">
+				Prix:
+				<h:inputText value="#{pMB.produit.prix}" />
+			</div>
+
+			<div class="form-group">
+				Quantité:
+				<h:inputText value="#{pMB.produit.quantite}" />
+			</div>
+
+			<div>
+				Photo:
+				<p:fileUpload value="#{pMB.uf}" mode="simple" />
+				<p:graphicImage value="#{pMB.produit.image}" />
+
+			</div>
+
+			<h:commandButton value="submit" ajax="false"
+				action="#{pMB.modifierProd}" />
+
+		</h:panelGrid>
+	</h:form>
+
+
+</h:body>
+
+</html>

@@ -11,8 +11,8 @@ import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 
-@Service("lcService")
-@Transactional
+//@Service("lcService")
+//@Transactional
 public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	@Autowired
 	private ILigneCommandeDao lcDao;

@@ -46,4 +46,9 @@ public class ProduitServiceImpl implements IProduitService{
 		return produitDao.rechercherProduit(id);
 	}
 
+	@Override
+	public List<Produit> produitByCategorie(Long id) {
+		return produitDao.produitByCategorie(id);
+	}
+
 }
