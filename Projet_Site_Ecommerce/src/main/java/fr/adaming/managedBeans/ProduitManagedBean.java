@@ -27,7 +27,7 @@ public class ProduitManagedBean implements Serializable {
 	private IProduitService produitService;
 	
 	// TODO en attente de produit
-	@ManagedProperty(value = "#{}")
+	@ManagedProperty(value = "#{catService}")
 	private ICategorieService categorieService;
 
 	// Setter pour l'injection de dépendance
@@ -95,7 +95,7 @@ public class ProduitManagedBean implements Serializable {
 		cat = categorieService.getCategorieById(cat);
 		
 
-		Produit prodOut = produitService.addProduit(produit, categorie);
+		Produit prodOut = produitService.addProduit(produit, cat);
 
 		if (prodOut.getId() != 0) {
 			// TODO nom de la page
@@ -110,7 +110,7 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String modifierProd() {
-		int verif = produitService.updateProduit(produit);
+		int verif = produitService.updateProduit(produit, cat);
 
 		if (verif != 0) {
 			// TODO nom de la page
@@ -147,7 +147,7 @@ public class ProduitManagedBean implements Serializable {
 		} else {
 			// TODO nom de la page
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Pas de produit associé à la catégorie " + id));
+					new FacesMessage("Pas de produit associé à la catégorie " + cat.getId()));
 
 			return "testFab";
 
