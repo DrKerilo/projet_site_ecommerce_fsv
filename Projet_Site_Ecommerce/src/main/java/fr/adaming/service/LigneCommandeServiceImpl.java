@@ -32,9 +32,9 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	
 	// Méthodes
 	@Override
-	public int updateLC(LigneCommande lc, Long id_prod) {
+	public int updateLC(LigneCommande lc, Produit pr) {
 		// TODO regarder si cohérent avec Valentin
-		Produit produit = prodDao.rechercherProduit(id_prod);
+		Produit produit = prodDao.rechercherProduit(pr);
 
 		if (produit != null) {
 			lc.setProduit(produit);
@@ -53,10 +53,17 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 
 					return lcDao.modifierLC(lc);
 				}
+				
 			} else if (lc.getQuantite() != 0) {
 				// Le produit n'existe pas encore dans le panier
 				lc.setPrix(produit.getPrix() * lc.getQuantite());
-				return lcDao.ajouterLC(lc);
+				lc = lcDao.ajouterLC(lc);
+				
+				if(lc != null){
+					return 1;
+				}
+				
+				return 0;
 			}
 		}
 

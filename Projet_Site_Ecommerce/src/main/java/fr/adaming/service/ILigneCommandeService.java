@@ -3,9 +3,10 @@ package fr.adaming.service;
 import java.util.List;
 
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Produit;
 
 public interface ILigneCommandeService {
-	public int updateLC(LigneCommande lc, Long id_prod);
+	public int updateLC(LigneCommande lc, Produit pr);
 //	
 	public int deleteLC(LigneCommande lc);
 	
