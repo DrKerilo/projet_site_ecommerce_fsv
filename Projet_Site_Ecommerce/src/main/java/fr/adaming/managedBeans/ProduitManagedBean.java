@@ -12,8 +12,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "pMB")
@@ -22,6 +25,10 @@ public class ProduitManagedBean implements Serializable {
 	// Transformation de l'association UML en JAVA
 	@ManagedProperty(value = "#{pService}")
 	private IProduitService produitService;
+	
+	// TODO en attente de produit
+	@ManagedProperty(value = "#{}")
+	private ICategorieService categorieService;
 
 	// Setter pour l'injection de dépendance
 	public void setProduitService(IProduitService produitService) {
@@ -32,12 +39,14 @@ public class ProduitManagedBean implements Serializable {
 	private Produit produit;
 	HttpSession maSession;
 	private List<Produit> listeProduit;
-	private Long id;
+	private Categorie cat;
 	private UploadedFile uf;
 
 	// Constructeur vide
 	public ProduitManagedBean() {
 		this.produit = new Produit();
+		this.cat = new Categorie();
+		this.uf = new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -54,14 +63,6 @@ public class ProduitManagedBean implements Serializable {
 		this.produit = produit;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId_p(Long id) {
-		this.id = id;
-	}
-
 	public UploadedFile getUf() {
 		return uf;
 	}
@@ -70,10 +71,29 @@ public class ProduitManagedBean implements Serializable {
 		this.uf = uf;
 	}
 
+	public List<Produit> getListeProduit() {
+		return listeProduit;
+	}
+
+	public void setListeProduit(List<Produit> listeProduit) {
+		this.listeProduit = listeProduit;
+	}
+
+	public Categorie getCat() {
+		return cat;
+	}
+
+	public void setCat(Categorie cat) {
+		this.cat = cat;
+	}
+
 	// Méthodes métier
 	public String ajouterProd() {
 		// APPEL DE LA METHODE AJOUTER
 		produit.setPhoto(this.uf.getContents());
+		//TODO
+		cat = categorieService.getCategorieById(cat);
+		produit.setCategorie(cat);
 
 		Produit prodOut = produitService.addProduit(produit);
 
@@ -119,15 +139,15 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String prodByCat() {
-
-		listeProduit = produitService.produitByCategorie(id);
+		listeProduit = produitService.produitByCategorie(cat);
 
 		if (listeProduit != null) {
 			// TODO nom de la page
 			return "testFab";
 		} else {
 			// TODO nom de la page
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pas de produit associé à la catégorie " + id));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Pas de produit associé à la catégorie " + id));
 
 			return "testFab";
 

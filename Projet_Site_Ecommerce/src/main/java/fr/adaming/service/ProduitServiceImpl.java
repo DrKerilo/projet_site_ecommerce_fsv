@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Service("pService")
@@ -22,7 +23,8 @@ public class ProduitServiceImpl implements IProduitService{
 
 	// Méthodes
 	@Override
-	public Produit addProduit(Produit prod) {
+	public Produit addProduit(Produit prod, Categorie cat) {
+		prod.setCategorie(cat);
 		return produitDao.addProduit(prod);
 	}
 
@@ -32,7 +34,8 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public int updateProduit(Produit prod) {
+	public int updateProduit(Produit prod, Categorie cat) {
+		prod.setCategorie(cat);
 		return produitDao.updateProduit(prod);
 	}
 
@@ -42,13 +45,13 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public Produit rechercherProduit(Long id) {
-		return produitDao.rechercherProduit(id);
+	public Produit rechercherProduit(Produit pr) {
+		return produitDao.rechercherProduit(pr);
 	}
 
 	@Override
-	public List<Produit> produitByCategorie(Long id) {
-		return produitDao.produitByCategorie(id);
+	public List<Produit> produitByCategorie(Categorie cat) {
+		return produitDao.produitByCategorie(cat);
 	}
 
 }

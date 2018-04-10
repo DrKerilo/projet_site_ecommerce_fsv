@@ -20,6 +20,7 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	@Autowired
 	private IProduitDao prodDao;
 
+	// setters
 	public void setLcDao(ILigneCommandeDao lcDao) {
 		this.lcDao = lcDao;
 	}
@@ -28,6 +29,8 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 		this.prodDao = prodDao;
 	}
 
+	
+	// Méthodes
 	@Override
 	public int updateLC(LigneCommande lc, Long id_prod) {
 		// TODO regarder si cohérent avec Valentin
@@ -38,9 +41,9 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 
 			LigneCommande lc2 = lcDao.isExist(lc);
 
-			// Vérifier si la ligne existe pour le produit 
+			// Vérifier si la ligne existe pour le produit
 			if (lc2 != null) {
-				
+
 				// Mettre à jour plutot que d'avoir un doublon
 				if (lc.getQuantite() <= 0) {
 					return lcDao.supprimerLC(lc2);
@@ -51,38 +54,33 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 					return lcDao.modifierLC(lc);
 				}
 			} else if (lc.getQuantite() != 0) {
-				// Le produit n'existe pas encore dans le panier 
+				// Le produit n'existe pas encore dans le panier
 				lc.setPrix(produit.getPrix() * lc.getQuantite());
 				return lcDao.ajouterLC(lc);
 			}
-
 		}
 
 		return 0;
 	}
 
 	@Override
-	public int deleteLC(LigneCommande lc) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<LigneCommande> getLigneCommande() {
-		// TODO Auto-generated method stub
-		return null;
+		return lcDao.getLigneCommande();
 	}
 
 	@Override
 	public double getTotal() {
-		// TODO Auto-generated method stub
-		return 0;
+		return lcDao.getTotal();
 	}
 
 	@Override
 	public void viderLC() {
-		// TODO Auto-generated method stub
+		lcDao.viderLC();
+	}
 
+	@Override
+	public int deleteLC(LigneCommande lc) {
+		return lcDao.supprimerLC(lc);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Repository
@@ -90,7 +91,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	}
 
 	@Override
-	public Produit rechercherProduit(Long id) {
+	public Produit rechercherProduit(Produit pr) {
 		// Ouvrir une session
 		Session s = sf.getCurrentSession();
 
@@ -101,13 +102,13 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query query = s.createQuery(req);
 
 		// Passage des parametres
-		query.setParameter("pId", id);
+		query.setParameter("pId", pr.getId());
 
 		return (Produit) query.uniqueResult();
 	}
 
 	@Override
-	public List<Produit> produitByCategorie(Long id) {
+	public List<Produit> produitByCategorie(Categorie cat) {
 		// Ouvrir une session
 		Session s = sf.getCurrentSession();
 
@@ -118,7 +119,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query query = s.createQuery(req);
 
 		// Passage des parametres
-		query.setParameter("pId", id);
+		query.setParameter("pId", cat.getId());
 
 		return query.list();
 	}

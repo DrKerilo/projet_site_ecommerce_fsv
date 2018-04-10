@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 public interface IProduitDao {
@@ -18,9 +19,9 @@ public interface IProduitDao {
 	public int deleteProduit(Produit prod);
 
 	// RECHERCHER UN PRODUIT
-	public Produit rechercherProduit(Long id);
+	public Produit rechercherProduit(Produit p);
 	
 	// LISTE PAR CATEGORIE
-	public List<Produit> produitByCategorie(Long id);
+	public List<Produit> produitByCategorie(Categorie Cat);
 
 }
