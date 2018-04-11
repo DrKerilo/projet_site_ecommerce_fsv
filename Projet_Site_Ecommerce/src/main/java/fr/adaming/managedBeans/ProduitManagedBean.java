@@ -97,21 +97,13 @@ public class ProduitManagedBean implements Serializable {
 	public String ajouterProd() {
 		// APPEL DE LA METHODE AJOUTER
 		produit.setPhoto(this.uf.getContents());
-		//TODO
 		cat = categorieService.getCategorieById(cat);
-		
-
 		Produit prodOut = produitService.addProduit(produit, cat);
-
 		if (prodOut.getId() != 0) {
-			// TODO nom de la page
-			return "testFab";
-
+			return "espaceadmin";
 		} else {
-			// TODO nom de la page
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
-
-			return "testFab";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Échec de l'ajout."));
+			return "ajoutadmin";
 		}
 	}
 
