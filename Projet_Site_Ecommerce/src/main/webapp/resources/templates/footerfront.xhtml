@@ -23,16 +23,16 @@
 			<p:dialog header="Authentification" widgetVar="dlg" resizable="false">
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="username" value="Identifiant:" />
-					<p:inputText id="username" value="#{adminMB.admin.mail}"
+					<p:inputText id="username" value="#{aMB.admin.mail}"
 						required="true" label="username" />
 
 					<h:outputLabel for="password" value="Mot de passe:" />
-					<p:password id="password" value="#{adminMB.admin.mdp}"
+					<p:password id="password" value="#{aMB.admin.mdp}"
 						required="true" label="password" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Se connecter en tant qu'administrateur" update="growl"
-							action="#{adminMB.seConnecter}" ajax="false"
+							action="#{aMB.seConnecter}" ajax="false"
 							oncomplete="handleLoginRequest(xhr, status, args)" />
 					</f:facet>
 				</h:panelGrid>

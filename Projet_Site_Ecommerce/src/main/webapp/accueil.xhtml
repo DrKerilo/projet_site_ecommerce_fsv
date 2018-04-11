@@ -7,11 +7,22 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Facelet</title>
+	<title>Facelet</title>
 </h:head>
 <h:body>
 
-
+	<!-- Inclure le templace dans la page accueil avec possibilité de modification -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie "body.html" -->
+		<ui:define name="bodyFront">
+			<h1 style="color: #333333; text-align: center">Bienvenue chez
+				L'Origa, votre magasin d'ameublement et de décoration d'intérieur</h1>
+			<div style="text-align: center; margin-top: 50px">
+				<h:graphicImage library="images"
+					name="decoration-salon-japonais.jpeg" />
+			</div>
+		</ui:define>
+	</ui:composition>
 
 </h:body>
 </html>

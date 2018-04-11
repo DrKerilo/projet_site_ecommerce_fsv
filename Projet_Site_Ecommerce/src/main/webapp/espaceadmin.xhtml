@@ -21,15 +21,15 @@
 					<h:form>
 						<p:outputLabel for="categ" value="Afficher les produits de:" />
 						<p:selectOneMenu id="categ"
-							value="#{produitMB.categorie.idCategorie}" style="width:125px">
+							value="#{pMB.cat.id}" style="width:125px">
 							<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
-							<f:selectItems value="#{sessionScope.listeCategories}" var="toto"
-								itemLabel="#{toto.nomCategorie}" itemValue="#{toto.idCategorie}" />
+							<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+								itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 						</p:selectOneMenu>
-						<h:outputText value="#{toto.idCategorie}" />
+						<h:outputText value="#{categ.id}" />
 
 						<p:commandButton value="Chercher"
-							action="#{produitMB.consulterToutByCategorie}" />
+							action="#{pMB.prodByCat}" />
 					</h:form>
 				</p:layoutUnit>
 
@@ -38,26 +38,26 @@
 					<h:form id="form">
 						<p:growl id="msgs" showDetail="true" />
 
-						<p:dataTable id="cat1" var="cat"
-							value="#{sessionScope.listeCategories}" editable="true"
+						<p:dataTable var="categ"
+							value="#{sessionScope.listeCat}" editable="true"
 							style="margin-bottom:20px;width:100%" rows="10" paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							<f:facet name="header">
            						Catégories
        						</f:facet>
 
-							<p:ajax event="rowEdit" listener="#{categorieMB.onRowEdit}"
+							<p:ajax event="rowEdit" listener="#{catMB.onRowEdit}"
 								update=":form:msgs" />
 							<p:ajax event="rowEditCancel"
-								listener="#{categorieMB.onRowCancel}" update=":form:msgs" />
+								listener="#{catMB.onRowCancel}" update=":form:msgs" />
 
 							<p:column headerText="#">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{cat.idCategorie}" />
+										<h:outputText value="#{categ.idCategorie}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText id="modelInput" value="#{cat.idCategorie}"
+										<p:inputText id="modelInput" value="#{categ.idCategorie}"
 											style="width:100%" />
 									</f:facet>
 								</p:cellEditor>
@@ -66,10 +66,10 @@
 							<p:column headerText="Nom">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{cat.nomCategorie}" />
+										<h:outputText value="#{categ.nomCategorie}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{cat.nomCategorie}" style="width:100%"
+										<p:inputText value="#{categ.nomCategorie}" style="width:100%"
 											label="Nom" />
 									</f:facet>
 								</p:cellEditor>
@@ -78,10 +78,10 @@
 							<p:column headerText="Description">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{cat.description}" />
+										<h:outputText value="#{categ.description}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{cat.description}" style="width:100%"
+										<p:inputText value="#{categ.description}" style="width:100%"
 											label="Description" />
 									</f:facet>
 								</p:cellEditor>
@@ -94,8 +94,8 @@
 								<p:commandButton update=":form:catDetail"
 									oncomplete="PF('catDialog').show()" icon="ui-icon-search"
 									title="View">
-									<f:setPropertyActionListener value="#{cat}"
-										target="#{categorieMB.categorie}" />
+									<f:setPropertyActionListener value="#{categ}"
+										target="#{catMB.categorie}" />
 								</p:commandButton>
 							</p:column>
 							<!-- Fonction "Edition" -->
@@ -105,9 +105,9 @@
 							<!-- Fonction "Suppression" + confirm dialog -->
 							<p:column styleClass="operations-admin">
 								<p:commandButton icon="ui-icon-closethick"
-									action="#{categorieMB.supprimer}" update="@all">
-									<f:setPropertyActionListener value="#{cat.idCategorie}"
-										target="#{categorieMB.categorie.idCategorie}" />
+									action="#{catMB.supprimerCategorie}" update="@all">
+									<f:setPropertyActionListener value="#{categ.id}"
+										target="#{catMB.categorie.id}" />
 									<p:confirm header="Confirmation" message="Êtes-vous sûr ?"
 										icon="ui-icon-alert" />
 								</p:commandButton>
@@ -126,20 +126,20 @@
 							showEffect="fade" hideEffect="fade" resizable="false">
 							<p:outputPanel id="catDetail" style="text-align:center;">
 								<p:panelGrid columns="2"
-									rendered="#{not empty categorieMB.categorie}"
+									rendered="#{not empty catMB.categorie}"
 									columnClasses="label,value">
 									<f:facet name="header">
-										<p:graphicImage value="#{categorieMB.categorie.image}"/>
+										<p:graphicImage value="#{catMB.categorie.image}"/>
 									</f:facet>
 
 									<h:outputText value="#:" />
-									<h:outputText value="#{categorieMB.categorie.idCategorie}" />
+									<h:outputText value="#{catMB.categorie.id}" />
 
 									<h:outputText value="Nom:" />
-									<h:outputText value="#{categorieMB.categorie.nomCategorie}" />
+									<h:outputText value="#{catMB.categorie.nomCategorie}" />
 
 									<h:outputText value="Description:" />
-									<h:outputText value="#{categorieMB.categorie.description}" />
+									<h:outputText value="#{catMB.categorie.description}" />
 								</p:panelGrid>
 							</p:outputPanel>
 						</p:dialog>

@@ -11,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Categorie;
@@ -134,18 +135,33 @@ public class CategorieManagedBean implements Serializable {
 			return "#";
 		}
 	}
-	
+
 	// Rechercher catégorie
-	public String consulterCategorie(){
-		Categorie cOut=categorieService.getCategorieById(categorie);
-		if(cOut!=null){
-			categorie=cOut;
-			indice=true;
+	public String consulterCategorie() {
+		Categorie cOut = categorieService.getCategorieById(categorie);
+		if (cOut != null) {
+			categorie = cOut;
+			indice = true;
 			return "#";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie recherchée n'existe pas."));
-			indice=false;
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("La catégorie recherchée n'existe pas."));
+			indice = false;
 			return "#";
 		}
+	}
+
+	// Modification de la catégorie avec rowEditor
+	public void onRowEdit(RowEditEvent event) {
+		categorieService.updateCategorie((Categorie) event.getObject());
+		listeCategories = categorieService.getAllCategorie();
+		session.setAttribute("listeCat", listeCategories);
+		FacesMessage msg = new FacesMessage("Catégorie modifiée", ((Categorie) event.getObject()).getNomCategorie());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Modification annulée", ((Categorie) event.getObject()).getNomCategorie());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 }

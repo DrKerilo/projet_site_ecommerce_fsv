@@ -70,7 +70,7 @@ public class AdminManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", aOut);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCat", listeCategories);
 			// TODO ajouter navigation
-			return "#";
+			return "espaceadmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin introuvable"));
 			return "accueil";
