@@ -34,6 +34,12 @@ public class ProduitManagedBean implements Serializable {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
+	
+	public void setCategorieService(ICategorieService categorieService) {
+		this.categorieService = categorieService;
+	}
+
+
 
 	// Les attribut transférés à la page
 	private Produit produit;
