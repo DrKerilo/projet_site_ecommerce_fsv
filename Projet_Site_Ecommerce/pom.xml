@@ -6,6 +6,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 	<!-- Ajouter les dépendances de conteneur Spring IoC : attention aux versions 
 		et à la compatibilité -->
 	<dependencies>
@@ -35,6 +44,16 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
 		</dependency>
+
+		<!-- Thème UI-Lighntess de Primefaces -->
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/ui-lightness -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>ui-lightness</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
+
 
 		<!-- Servlet -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -164,8 +183,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.3</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<!-- Forcer Maven à compiler avec Java 8 (par défaut J2SE-1.5 qui est Java 

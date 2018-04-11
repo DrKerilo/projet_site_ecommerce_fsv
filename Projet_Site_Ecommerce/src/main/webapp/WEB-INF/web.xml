@@ -46,4 +46,9 @@
 		<welcome-file>accueil.xhtml</welcome-file>
 	</welcome-file-list>
 
+	<!-- Charger le thème de Primefaces -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>ui-lightness</param-value>
+	</context-param>
 </web-app>
