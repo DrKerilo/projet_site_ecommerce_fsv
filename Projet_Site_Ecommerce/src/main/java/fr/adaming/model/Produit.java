@@ -132,5 +132,12 @@ public class Produit implements Serializable {
 	public void setListeLignesCommandes(List<LigneCommande> listeLignesCommandes) {
 		this.listeLignesCommandes = listeLignesCommandes;
 	}
+	@Override
+	public String toString() {
+		return "Produit [id=" + id + ", nomProduit=" + nomProduit + ", description=" + description + ", prix=" + prix
+				+ ", quantite=" + quantite + ", selectionne=" + selectionne + "]";
+	}
+	
+	
 	
 }

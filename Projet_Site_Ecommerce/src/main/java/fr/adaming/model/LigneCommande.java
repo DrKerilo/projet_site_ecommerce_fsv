@@ -78,6 +78,10 @@ public class LigneCommande implements Serializable {
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}
+	@Override
+	public String toString() {
+		return "LigneCommande [id=" + id + ", quantite=" + quantite + ", prix=" + prix + "]";
+	}
 	
 	
 	

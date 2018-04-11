@@ -15,30 +15,32 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Categorie implements Serializable {
-	
+
 	// Attributs
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_cat")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_cat")
 	private Long id;
 	private String nomCategorie;
 	@Lob
 	private byte[] photo;
 	@Transient
 	private String image;
-	private String description;	
-	
+	private String description;
+
 	// Transformation de l'association UML en Java
-	// OneToMany avec Produit (si on supprime une catégorie, on supprime les produits à l'intérieur)
-	@OneToMany(mappedBy="categorie", cascade=CascadeType.REMOVE)
+	// OneToMany avec Produit (si on supprime une catégorie, on supprime les
+	// produits à l'intérieur)
+	@OneToMany(mappedBy = "categorie", cascade = CascadeType.REMOVE)
 	private List<Produit> listeProduits;
-	
+
 	// Constructeurs
 	public Categorie() {
 		super();
 	}
+
 	public Categorie(Long id, String nomCategorie, byte[] photo, String description) {
 		super();
 		this.id = id;
@@ -46,49 +48,67 @@ public class Categorie implements Serializable {
 		this.photo = photo;
 		this.description = description;
 	}
+
 	public Categorie(String nomCategorie, byte[] photo, String description) {
 		super();
 		this.nomCategorie = nomCategorie;
 		this.photo = photo;
 		this.description = description;
 	}
-	
+
 	// Getters et setters
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNomCategorie() {
 		return nomCategorie;
 	}
+
 	public void setNomCategorie(String nomCategorie) {
 		this.nomCategorie = nomCategorie;
 	}
+
 	public byte[] getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
 	public String getImage() {
 		return image;
 	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public List<Produit> getListeProduits() {
 		return listeProduits;
 	}
+
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
 	}
+
+	@Override
+	public String toString() {
+		return "Categorie [id=" + id + ", nomCategorie=" + nomCategorie + "]";
+	}
+
 	
 }

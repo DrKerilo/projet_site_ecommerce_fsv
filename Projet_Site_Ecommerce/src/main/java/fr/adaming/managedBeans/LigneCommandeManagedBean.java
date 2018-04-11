@@ -20,9 +20,9 @@ import fr.adaming.service.IProduitService;
 @RequestScoped
 public class LigneCommandeManagedBean implements Serializable {
 	// Transformation de l'association UML en JAVA
-	@ManagedProperty(value = "lcService")
+	@ManagedProperty(value = "#{lcService}")
 	ILigneCommandeService lCommandeService;
-	@ManagedProperty(value = "pService")
+	@ManagedProperty(value = "#{pService}")
 	IProduitService prService;
 
 	// Setter pour l'injection de dépendance
@@ -42,6 +42,7 @@ public class LigneCommandeManagedBean implements Serializable {
 	// Constructeur vide
 	public LigneCommandeManagedBean() {
 		this.lc = new LigneCommande();
+		this.pr = new Produit();
 	}
 
 	@PostConstruct
@@ -75,16 +76,19 @@ public class LigneCommandeManagedBean implements Serializable {
 			this.maSession.setAttribute("panier", liste);
 			
 			// TODO modifier la page de sortie
-			return "panier";
+			return "testFab";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
 			// TODO modifier la page de sortie
-			return "modifPanier";
+			return "testFab";
 		}
 	}
 	
 	public String supprimerLC(){
 		lc.setQuantite(0);
+		
+		System.out.println(pr);
+		System.out.println(lc);
 		
 		int verif = lCommandeService.updateLC(lc, pr);
 		
@@ -95,7 +99,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			this.maSession.setAttribute("panier", liste);
 		}
 		// TODO modifier la page de sortie
-		return "panier";
+		return "testFab";
 
 	}
 

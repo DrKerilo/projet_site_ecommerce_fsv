@@ -87,15 +87,19 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 		
 		// Requete HQL
-		String req = "FROM LigneCommande lc WHERE ld.id = :pId";
+		String req = "FROM LigneCommande lc WHERE lc.produit.id = :pId";
 
 		// Recuperer le query
 		Query query = s.createQuery(req);
 
 		// Passage des parametres
-		query.setParameter("pId", lc.getId());
+		query.setParameter("pId", lc.getProduit().getId());
+		
+		LigneCommande lcOut = (LigneCommande) query.uniqueResult();
+		
+		System.out.println(lcOut);
 
-		return (LigneCommande) query.uniqueResult();
+		return lcOut;
 	}
 
 	@Override
@@ -121,13 +125,12 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 
 		// Requete HQL
-//		String req;
+		String req = "DELETE FROM LigneCommande lc";
 
 		// Recuperer le query
-//		Query query = s.createQuery(req);
+		Query query = s.createQuery(req);
 		
-		// Passage des parametres
-		// TODO Auto-generated method stub
+		 query.executeUpdate();
 
 	}
 

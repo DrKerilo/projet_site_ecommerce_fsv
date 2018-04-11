@@ -40,14 +40,17 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 			lc.setProduit(produit);
 
 			LigneCommande lc2 = lcDao.isExist(lc);
+			System.out.println(lc2);
 
 			// Vérifier si la ligne existe pour le produit
 			if (lc2 != null) {
 
 				// Mettre à jour plutot que d'avoir un doublon
 				if (lc.getQuantite() <= 0) {
+					System.out.println("Je supprime");
 					return lcDao.supprimerLC(lc2);
 				} else {
+					System.out.println("Je modifie le panier");
 					// Le produit est présent dans le panier - modifier
 					lc.setPrix(produit.getPrix() * lc.getQuantite());
 
@@ -55,6 +58,7 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 				}
 				
 			} else if (lc.getQuantite() != 0) {
+				System.out.println("J'ajoute au panier");
 				// Le produit n'existe pas encore dans le panier
 				lc.setPrix(produit.getPrix() * lc.getQuantite());
 				lc = lcDao.ajouterLC(lc);
