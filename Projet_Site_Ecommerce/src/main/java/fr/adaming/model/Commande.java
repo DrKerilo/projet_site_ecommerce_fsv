@@ -72,6 +72,11 @@ public class Commande implements Serializable {
 	public void setListeLignesCommandes(List<LigneCommande> listeLignesCommandes) {
 		this.listeLignesCommandes = listeLignesCommandes;
 	}
+	@Override
+	public String toString() {
+		return "Commande [id=" + id + ", dateCommande=" + dateCommande + "]";
+	}
+	
 	
 
 }

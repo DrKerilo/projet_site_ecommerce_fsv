@@ -11,8 +11,96 @@
 
 <h:body>
 	<h:form>
-		<h:messages/>
+		<h:messages style="color:red" />
 	</h:form>
+
+		<h1>Formulaire modification du panier</h1>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			 Id : <h:inputText value="#{lcMB.pr.id}" />
+			 Quantité : <h:inputText value="#{lcMB.lc.quantite}" />
+ 			 
+			
+			<h:commandButton value="Modifier le panier" action="#{lcMB.updateLC}" />
+		</h:panelGrid>
+
+	</h:form>
+
+	<h1 style="color: coral; text-align: center">Mon panier</h1>
+
+	<h:form>
+		<p:graphicImage library="image" name="shopping-basket.png" />
+		<p:dataTable var="pa" value="#{sessionScope.panier}">
+
+
+			<p:column headerText="ID Produit">
+				<h:outputText value="#{pa.produit.id}" />
+			</p:column>
+
+			<p:column headerText="Produit">
+				<h:outputText value="#{pa.produit.nomProduit}" />
+			</p:column>
+
+			<p:column headerText="Quantité">
+				<h:outputText value="#{pa.quantite}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pa.prix}€" />
+			</p:column>
+
+			<p:column headerText="Operations">
+
+				Modifier | 
+				<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
+					update="@all">
+					<f:setPropertyActionListener value="#{pa.produit.id}"
+						target="#{lcMB.pr.id}" />
+				</h:commandLink>
+
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+
+	<h:form enctype="multipart/form-data">
+
+		<h1>Formulaire d'ajout de cat</h1>
+
+		<h:panelGrid columns="2">
+			<div class="form-group">
+				Nom categorie:
+				<h:inputText value="#{catMB.categorie.nomCategorie}" />
+			</div>
+
+			<div class="form-group">
+				Description:
+				<h:inputText value="#{catMB.categorie.description}" />
+			</div>
+
+			<div>
+				Photo:
+				<p:fileUpload value="#{catMB.uf}" mode="simple" />
+				<p:graphicImage value="#{catMB.categorie.photo}" />
+
+			</div>
+
+			<p:commandButton value="submit" ajax="false"
+				action="#{catMB.ajouterCategorie}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+	<h:messages style="color:red" />
+
+
+
+
+
 
 
 	<h1>Produits par catégorie</h1>
@@ -20,7 +108,7 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			Id : <h:inputText value="#{pMB.cat.id}" />
-			<h:commandButton value="Liste par id" action="#{pMB.prodByCat}"/>
+			<h:commandButton value="Liste par id" action="#{pMB.prodByCat}" />
 		</h:panelGrid>
 
 
@@ -119,7 +207,7 @@
 				Catégorie :
 				<h:inputText value="#{pMB.cat.id}" />
 			</div>
-			
+
 			<h:commandButton value="submit" ajax="false"
 				action="#{pMB.ajouterProd}" />
 
@@ -174,7 +262,7 @@
 				Catégorie :
 				<h:inputText value="#{pMB.cat.id}" />
 			</div>
-			
+
 			<h:commandButton value="submit" ajax="false"
 				action="#{pMB.modifierProd}" />
 
