@@ -39,7 +39,7 @@
 						<p:growl id="growlprod" summary="true" life="3000" />
 						<h:panelGrid columns="2">
 							<h:outputLabel for="nameCat" value="Nom du produit:" />
-							<p:inputText value="#{pMB.produit.designation}" />
+							<p:inputText value="#{pMB.produit.nomProduit}" />
 							<h:outputLabel for="nameCat" value="Description:" />
 							<p:inputText value="#{pMB.produit.description}" />
 							<h:outputLabel for="nameCat" value="Prix (€):" />
@@ -47,7 +47,7 @@
 							<h:outputLabel for="nameCat" value="Quantité en stock:" />
 							<p:inputText value="#{pMB.produit.quantite}" />
 							<h:outputLabel for="nameCat" value="Catégorie du produit:" />
-							<p:selectOneMenu value="#{pMB.categorie.idCategorie}">
+							<p:selectOneMenu value="#{pMB.cat.id}">
 								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
 									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 							</p:selectOneMenu>

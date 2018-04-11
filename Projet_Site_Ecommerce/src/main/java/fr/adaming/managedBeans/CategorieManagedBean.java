@@ -100,11 +100,11 @@ public class CategorieManagedBean implements Serializable {
 			// Récupérer la liste des catégories mise à jour
 			listeCategories = categorieService.getAllCategorie();
 			this.session.setAttribute("listeCategories", listeCategories);
-			return "#";
+			return "espaceadmin";
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur dans l'ajout."));
-			return "#";
+			return "ajoutadmin";
 		}
 	}
 
@@ -123,16 +123,16 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	// Supprimer catégorie
-	public String supprimerCategorie() {
+	public void supprimerCategorie() {
 		int verif = categorieService.deleteCategorie(categorie);
 		if (verif != 0) {
 			// Récupérer la liste des catégories mises à jour
 			listeCategories = categorieService.getAllCategorie();
-			return "#";
+			// L'ajouter à la session
+			session.setAttribute("listeCat", listeCategories);
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie indiquée n'existe pas."));
-			return "#";
 		}
 	}
 
