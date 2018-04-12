@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Client</title>
+</h:head>
+
+
+
+
+
+<h:body>
+
+<h1 style="color: coral; text-align: center">Produits de la catégorie</h1>
+
+<h:form>
+	<h:panelGrid columns="2">
+			 Numéro catégorie : <h:inputText value="#{pMB.cat.id}" />
+		<h:commandButton action="#{pMB.prodByCat}" value="Rechercher" />
+
+	</h:panelGrid>
+</h:form>
+
+	<!-- inclure un template -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie corps -->
+		<ui:define name="bodyFront">
+
+			<h:form>
+				<p:dataTable var="produit" value="#{pMB.listeProduit}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+
+
+					<p:column headerText="ID Produit">
+						<h:outputText value="#{produit.id}" />
+					</p:column>
+
+					<p:column headerText="Produit">
+						<h:outputText value="#{produit.designation}" />
+					</p:column>
+
+					<p:column headerText="Quantité">
+						<h:outputText value="#{produit.quantite}" />
+					</p:column>
+
+					<p:column headerText="Prix">
+						<h:outputText value="#{produit.prix}€" />
+					</p:column>
+
+					<p:column headerText="Operations">
+				Détails article | Modifier le panier
+					</p:column>
+
+
+					<f:facet name="paginatorTopLeft">
+						<p:commandButton type="button" icon="fa fa-sync" />
+					</f:facet>
+
+
+					<f:facet name="paginatorBottomRight">
+						<p:commandButton type="button" icon="fa fa-cloud-upload" />
+					</f:facet>
+				</p:dataTable>
+			</h:form>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Client</title>
+</h:head>
+
+<h:body>
+
+	<!-- inclure un template -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie corps -->
+		<ui:define name="bodyFront">
+
+			<h:form>
+				<p:dataTable var="cat" value="#{catMB.listeCategories}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+					<p:column headerText="Id">
+						<h:outputText value="#{ca.id}" />
+					</p:column>
+
+					<p:column headerText="Catégorie">
+						<h:outputText value="#{cat.nomCategorie}" />
+					</p:column>
+
+					<p:column headerText="Description">
+						<h:outputText value="#{cat.description}" />
+					</p:column>
+
+					<p:column headerText="Image">
+						<h:outputText value="#{cat.color}" />
+					</p:column>
+
+					<p:column headerText="Action">
+						<h:outputText value="Liste de produits" />
+					</p:column>
+
+					<f:facet name="paginatorTopLeft">
+						<p:commandButton type="button" icon="fa fa-sync" />
+					</f:facet>
+
+					<f:facet name="paginatorBottomRight">
+						<p:commandButton type="button" icon="fa fa-cloud-upload" />
+					</f:facet>
+				</p:dataTable>
+			</h:form>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+
+</html>

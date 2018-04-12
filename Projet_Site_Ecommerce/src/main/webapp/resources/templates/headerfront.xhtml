@@ -24,14 +24,16 @@
 			
 				<p:menuitem value="Accueil" url="accueil.xhtml" icon="ui-icon-home"/>
 				
-				<p:menuitem value="Voir nos catégories" icon="ui-icon-heart"  action="#{categorieMB.consulterTout}"/>
+				<p:menuitem value="Voir nos catégories" icon="ui-icon-heart"  action="#{catMB.consulterTout}"/>
+				
+				<p:menuitem value="Voir nos produits" icon="ui-icon-heart"  action="#{pMB.prodByCat}"/>
 				
 				<p:menuitem value="Chercher un produit" url="recherche.xhtml" icon="ui-icon-search"/>
-
+				
 				<f:facet name="options">
 				<!-- Accès au panier: méthode client ! -->
-					<p:commandButton value="Panier" icon="ui-icon-cart"
-						action="#" style="background:#E5EC9E;color:#333333"/>
+					<p:commandButton value="Mon panier" icon="ui-icon-cart"
+						action="panier.xhtml" style="background:#E5EC9E;color:#333333"/>
 				</f:facet>
 			</p:menubar>
 		</h:form>

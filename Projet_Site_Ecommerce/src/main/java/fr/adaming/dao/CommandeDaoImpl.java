@@ -31,7 +31,6 @@ public class CommandeDaoImpl implements ICommandeDao {
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String currentTime = sdf.format(dt);
 
-		// TODO Auto-generated method stub
 		Commande commande = new Commande(dt);
 		commande.setListeLignesCommandes(liste);
 		commande.setClient(cl);
