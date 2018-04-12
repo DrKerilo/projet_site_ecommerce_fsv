@@ -38,6 +38,8 @@ public class LigneCommandeManagedBean implements Serializable {
 	private LigneCommande lc;
 	private Produit pr;
 	HttpSession maSession;
+	private Long idTest;
+	private int quantite;
 
 	// Constructeur vide
 	public LigneCommandeManagedBean() {
@@ -66,9 +68,32 @@ public class LigneCommandeManagedBean implements Serializable {
 	public void setPr(Produit pr) {
 		this.pr = pr;
 	}
+	
+	
+
+	public Long getIdTest() {
+		return idTest;
+	}
+
+	public void setIdTest(Long idTest) {
+		this.idTest = idTest;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
 
 	// Méthodes metiers
 	public String updateLC(){
+		System.out.println(lc);
+		System.out.println(pr);
+		System.out.println(idTest);
+		System.out.println(quantite);
+		
 		int verif = lCommandeService.updateLC(lc, pr);
 		
 		if(verif != 0){
@@ -76,11 +101,11 @@ public class LigneCommandeManagedBean implements Serializable {
 			this.maSession.setAttribute("panier", liste);
 			
 			// TODO modifier la page de sortie
-			return "testFab";
+			return "panier";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
 			// TODO modifier la page de sortie
-			return "testFab";
+			return "clientProduitsParCat";
 		}
 	}
 	

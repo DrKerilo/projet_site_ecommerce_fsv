@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +21,7 @@ import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "pMB")
-@RequestScoped
+@SessionScoped
 public class ProduitManagedBean implements Serializable {
 	// Transformation de l'association UML en JAVA
 	@ManagedProperty(value = "#{pService}")
@@ -141,13 +142,13 @@ public class ProduitManagedBean implements Serializable {
 
 		if (listeProduit != null) {
 			// TODO nom de la page
-			return "testFab";
+			return "clientProduitsParCat";
 		} else {
 			// TODO nom de la page
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Pas de produit associé à la catégorie " + cat.getId()));
 
-			return "testFab";
+			return "clientProduitsParCat";
 
 		}
 	}

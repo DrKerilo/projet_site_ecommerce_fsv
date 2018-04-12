@@ -14,7 +14,7 @@
 		<h:messages style="color:red" />
 	</h:form>
 
-		<h1>Formulaire modification du panier</h1>
+	<h1>Formulaire modification du panier</h1>
 
 	<h:form>
 		<h:panelGrid columns="2">
@@ -30,8 +30,7 @@
 	<h1 style="color: coral; text-align: center">Mon panier</h1>
 
 	<h:form>
-		<p:graphicImage library="image" name="shopping-basket.png" />
-		<p:dataTable var="pa" value="#{sessionScope.panier}">
+		<p:dataTable var="pa" value="#{sessionScope.panier}" editable="true">
 
 
 			<p:column headerText="ID Produit">
@@ -51,14 +50,18 @@
 			</p:column>
 
 			<p:column headerText="Operations">
-
-				Modifier | 
+				<h:commandLink value="Modifier" action="testFab.xml" update="@all">
+					<f:setPropertyActionListener value="#{pa.produit.id}"
+						target="#{lcMB.pr.id}" />
+					<f:setPropertyActionListener value="#{pa.quantite}"
+						target="#{lcMB.lc.quantite}" />
+				</h:commandLink>
+						| 
 				<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
 					update="@all">
 					<f:setPropertyActionListener value="#{pa.produit.id}"
 						target="#{lcMB.pr.id}" />
 				</h:commandLink>
-
 			</p:column>
 
 		</p:dataTable>

@@ -15,20 +15,23 @@
 
 <h:body>
 
-<h1 style="color: coral; text-align: center">Produits de la catégorie</h1>
-
-<h:form>
-	<h:panelGrid columns="2">
-			 Numéro catégorie : <h:inputText value="#{pMB.cat.id}" />
-		<h:commandButton action="#{pMB.prodByCat}" value="Rechercher" />
-
-	</h:panelGrid>
-</h:form>
-
 	<!-- inclure un template -->
 	<ui:composition template="/resources/templates/layoutfront.xhtml">
 		<!-- Modifier la partie corps -->
 		<ui:define name="bodyFront">
+
+
+			<h1 style="color: coral; text-align: center">Produits de la
+				catégorie</h1>
+
+			<h:form>
+				<h:panelGrid columns="2">
+			 Numéro catégorie : <h:inputText value="#{pMB.cat.id}" />
+					<h:commandButton action="#{pMB.prodByCat}" value="Rechercher" />
+
+				</h:panelGrid>
+			</h:form>
+
 
 			<h:form>
 				<p:dataTable var="produit" value="#{pMB.listeProduit}" rows="10"
@@ -42,11 +45,11 @@
 					</p:column>
 
 					<p:column headerText="Produit">
-						<h:outputText value="#{produit.designation}" />
+						<h:outputText value="#{produit.nomProduit}" />
 					</p:column>
 
 					<p:column headerText="Quantité">
-						<h:outputText value="#{produit.quantite}" />
+						<h:inputText value="#{produit.quantite}" />
 					</p:column>
 
 					<p:column headerText="Prix">
@@ -54,7 +57,16 @@
 					</p:column>
 
 					<p:column headerText="Operations">
-				Détails article | Modifier le panier
+				Détails article | 
+								<h:commandLink value="Modifier le panier"
+							action="#{lcMB.updateLC}">
+							<f:setPropertyActionListener value="#{produit.id}"
+								target="#{lcMB.pr.id}" />
+							<f:setPropertyActionListener value="#{produit.quantite}"
+								target="#{lcMB.lc.quantite}" />
+						</h:commandLink>
+
+
 					</p:column>
 
 
@@ -69,6 +81,9 @@
 				</p:dataTable>
 			</h:form>
 
+			<h:form>
+				<h:messages style="color:red" />
+			</h:form>
 
 
 		</ui:define>

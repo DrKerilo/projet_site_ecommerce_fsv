@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page login</title>
+</h:head>
+
+<h:body>
+	<!-- inclure un template -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie corps -->
+		<ui:define name="bodyFront">
+	
+	
+	La commande est validée
+
+Vous recevrez un email de confirmation pour la commande
+
+<h:link value="Retourner à la page d'accueil" outcome="accueil.xhtml" />
+
+
+		</ui:define>
+	</ui:composition>
+
+
+
+</h:body>
+
+</html>

@@ -6,57 +6,66 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Page login</title>
+	<title>Page login</title>
 </h:head>
 
 <h:body>
-<!-- inclure un template -->
-<ui:composition template = "/resources/templates/layoutfront.xhtml">
-<!-- Modifier la partie corps -->
-	<ui:define name="bodyFront">
-	
-	<h1 style="color: coral; text-align: center">Mon panier</h1>
+	<!-- inclure un template -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie corps -->
+		<ui:define name="bodyFront">
 
-	<h:form>
-		<p:graphicImage library="image" name="shopping-basket.png" />
-		<p:dataTable var="pa" value="#{sessionScope.panier}">
+			<h1 style="color: coral; text-align: center">Mon panier</h1>
+
+			<h:form>
+				<p:dataTable var="pa" value="#{sessionScope.panier}">
 
 
-			<p:column headerText="ID Produit">
-				<h:outputText value="#{pa.produit.id}" />
-			</p:column>
+					<p:column headerText="ID Produit">
+						<h:outputText value="#{pa.produit.id}" />
+					</p:column>
 
-			<p:column headerText="Produit">
-				<h:outputText value="#{pa.produit.nomProduit}" />
-			</p:column>
+					<p:column headerText="Produit">
+						<h:outputText value="#{pa.produit.nomProduit}" />
+					</p:column>
 
-			<p:column headerText="Quantité">
-				<h:outputText value="#{pa.quantite}" />
-			</p:column>
+					<p:column headerText="Prix unitaire">
+						<h:outputText value="#{pa.produit.prix}€" />
+					</p:column>
 
-			<p:column headerText="Prix">
-				<h:outputText value="#{pa.prix}€" />
-			</p:column>
+					<p:column headerText="Quantité">
+						<h:inputText value="#{pa.quantite}" />
+					</p:column>
 
-			<p:column headerText="Operations">
+					<p:column headerText="Prix">
+						<h:outputText value="#{pa.prix}€" />
+					</p:column>
 
-				Modifier | 
-				<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
-					update="@all">
-					<f:setPropertyActionListener value="#{pa.produit.id}"
-						target="#{lcMB.pr.id}" />
-				</h:commandLink>
+					<p:column headerText="Operations">
+						<h:commandLink value="Modifier" action="testFab.xml" update="@all">
+							<f:setPropertyActionListener value="#{pa.produit.id}"
+								target="#{lcMB.pr.id}" />
+							<f:setPropertyActionListener value="#{pa.quantite}"
+								target="#{lcMB.lc.quantite}" />
+						</h:commandLink>
+						 | 
+						<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
+							update="@all">
+							<f:setPropertyActionListener value="#{pa.produit.id}"
+								target="#{lcMB.pr.id}" />
+						</h:commandLink>
 
-			</p:column>
+					</p:column>
 
-		</p:dataTable>
+				</p:dataTable>
 
-	</h:form>
+			</h:form>
 
-	
+			<h:link style = "color:white" value="Finaliser la commande" outcome="ajoutClient.xhtml" />
 
-	</ui:define>
-</ui:composition>
+
+		</ui:define>
+	</ui:composition>
 
 
 
