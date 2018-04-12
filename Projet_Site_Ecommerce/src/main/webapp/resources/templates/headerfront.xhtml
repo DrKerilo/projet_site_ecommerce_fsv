@@ -14,13 +14,13 @@
 	<!-- Définition du contenu du header grâce à la balise ui:composition -->
 	<ui:composition>
 		<div
-			style="width: 450px; margin-left: auto; margin-right: auto; margin-top: 20px; text-align: center">
-			<a href="accueil.xhtml"><h:graphicImage library="images" name="logoOriga.jpg" /></a>
+			style="margin-left: auto; margin-right: auto; margin-top: 20px; text-align: center">
+			<a href="accueil.xhtml"><h:graphicImage library="images" name="totostorelogo.jpg" style="height:180px;width:auto"/></a>
 		</div>
 		<h:form>
 			<p:growl id="messages" />
 
-			<p:menubar style="padding:10px;background:#f6a828;border:1px solid #F77A10">
+			<p:menubar style="padding:10px;background:#808080;border:1px solid #5C5C5C">
 			
 				<p:menuitem value="Accueil" url="accueil.xhtml" icon="ui-icon-home"/>
 				
@@ -33,7 +33,7 @@
 				<f:facet name="options">
 				<!-- Accès au panier: méthode client ! -->
 					<p:commandButton value="Mon panier" icon="ui-icon-cart"
-						action="panier.xhtml" style="background:#E5EC9E;color:#333333"/>
+						action="panier.xhtml"/>
 				</f:facet>
 			</p:menubar>
 		</h:form>

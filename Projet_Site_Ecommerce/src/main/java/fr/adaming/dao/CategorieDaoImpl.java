@@ -48,7 +48,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@Override
 	public int updateCategorie (Categorie c) {
 		// Requête HQL
-		String req = "UPDATE Categorie c SET c.nomCategorie=:pNom, c.photo=:pPhoto, c.description=:pDescription WHERE c.idCategorie=:pId";
+		String req = "UPDATE Categorie c SET c.nomCategorie=:pNom, c.photo=:pPhoto, c.description=:pDescription WHERE c.id=:pId";
 		// Ouvrir une session
 		session = sf.getCurrentSession();
 		// Query

@@ -2,20 +2,19 @@
 
 body{
 	font-family:Century Gothic, Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	background-color:black;
 }
 
 .lay-admin{
-	background-color: #E3EBA0;
-	/*background-image: url("#{resource['images:bckgnd-admin.png']}");
-	background-repeat: repeat;
-	background-size: 2%;*/
+	background-color: black;
+/* 	background-image: url("#{resource['images:bckgnd-admin.png']}"); */
+/* 	background-repeat: repeat; */
+/* 	background-size: 2%; */
 }
 
 .body-admin{
-	background-color:white;
 	height:500px;
 	margin-top:20px;
-	background-color:#E3EBA0;
 }
 
 .operations-admin{

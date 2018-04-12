@@ -14,15 +14,15 @@
 	<!-- Définition du contenu du header grâce à la balise ui:composition -->
 	<ui:composition>
 		<div
-			style="width: 450px; margin-left: auto; margin-right: auto; margin-top: 20px; text-align: center">
+			style="margin-left: auto; margin-right: auto; margin-top: 20px; text-align: center">
 			<a href="accueil.xhtml"><h:graphicImage library="images"
-					name="logoOriga.jpg" /></a>
+					name="totostorelogo.jpg" style="height:180px;width:auto" /></a>
 		</div>
 		<h:form>
 			<p:growl id="messages" />
 
 			<p:menubar
-				style="padding:10px;background:#f6a828;border:1px solid #F77A10">
+				style="padding:10px;background:#808080;border:1px solid #5C5C5C">
 
 				<p:menuitem value="Gestion du magasin" url="espaceadmin.xhtml"
 					icon="ui-icon-gear" />
@@ -33,8 +33,7 @@
 				<f:facet name="options">
 					<!-- Déconnexion et retour au front office -->
 					<p:commandButton value="Déconnexion: retour au magasin"
-						icon="ui-icon-home" action="#{aMB.seDeconnecter}"
-						style="background:#E5EC9E;color:#333333" ajax="false"/>
+						icon="ui-icon-home" action="#{aMB.seDeconnecter}" ajax="false" />
 				</f:facet>
 			</p:menubar>
 		</h:form>
