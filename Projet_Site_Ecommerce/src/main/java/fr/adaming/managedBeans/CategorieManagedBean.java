@@ -90,6 +90,13 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	// Méthodes métiers
+	// Consulter toutes les catégories
+	public String consulterTout() {
+		this.listeCategories = categorieService.getAllCategorie();
+		this.session.setAttribute("listeCat", listeCategories);
+		return "categories";
+	}
+	
 	// Ajout catégorie
 	public String ajouterCategorie() {
 		// Ajouter la photo dans la catégorie
