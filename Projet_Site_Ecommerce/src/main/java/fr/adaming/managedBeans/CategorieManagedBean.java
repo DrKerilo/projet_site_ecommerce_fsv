@@ -99,7 +99,7 @@ public class CategorieManagedBean implements Serializable {
 		if (catAjout.getId() != 0) {
 			// Récupérer la liste des catégories mise à jour
 			listeCategories = categorieService.getAllCategorie();
-			this.session.setAttribute("listeCategories", listeCategories);
+			this.session.setAttribute("listeCat", listeCategories);
 			return "espaceadmin";
 		} else {
 			// Si erreur

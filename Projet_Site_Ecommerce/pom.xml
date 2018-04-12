@@ -46,14 +46,12 @@
 		</dependency>
 
 		<!-- Thème UI-Lighntess de Primefaces -->
-		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/ui-lightness -->
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/all-themes -->
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>ui-lightness</artifactId>
+			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency>
-
-
 
 		<!-- Servlet -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->

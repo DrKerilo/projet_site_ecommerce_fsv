@@ -49,6 +49,6 @@
 	<!-- Charger le thème de Primefaces -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>ui-lightness</param-value>
+		<param-value>afterdark</param-value>
 	</context-param>
 </web-app>
