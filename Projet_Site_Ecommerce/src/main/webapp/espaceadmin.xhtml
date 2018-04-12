@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Espace administrateur</title>
+	<title>Espace administrateur</title>
 </h:head>
 <h:body>
 	<!-- Inclure le templace dans la page avec possibilité de modification -->
@@ -18,19 +18,21 @@
 
 				<!-- Menu sur la partie gauche de la page -->
 				<p:layoutUnit position="west" size="300">
-					<h:form>
-						<p:outputLabel for="categ" value="Afficher les produits de:" />
-						<p:selectOneMenu id="categ"
-							value="#{pMB.cat.id}" style="width:125px">
-							<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
-							<f:selectItems value="#{sessionScope.listeCat}" var="categ"
-								itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
-						</p:selectOneMenu>
-						<h:outputText value="#{categ.id}" />
+					<div style="padding:10px">
+						<h:form>
+							<p:outputLabel for="categ" value="Afficher les produits de:" />
+							<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
+								style="width:125px">
+								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
+								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+							</p:selectOneMenu>
+							<br />
+							<h:outputText value="#{categ.id}" />
 
-						<p:commandButton value="Chercher"
-							action="#{pMB.prodByCat}" />
-					</h:form>
+							<p:commandButton value="Chercher" action="#{pMB.prodByCat}" />
+						</h:form>
+					</div>
 				</p:layoutUnit>
 
 				<!-- Affichage des catégories sur la partie droite de la page -->
@@ -38,9 +40,9 @@
 					<h:form id="form">
 						<p:growl id="msgs" showDetail="true" />
 
-						<p:dataTable var="categ"
-							value="#{sessionScope.listeCat}" editable="true"
-							style="margin-bottom:20px;width:100%" rows="10" paginator="true"
+						<p:dataTable var="categ" value="#{sessionScope.listeCat}"
+							editable="true" style="margin-bottom:20px;width:100%" rows="10"
+							paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							<f:facet name="header">
            						Catégories
@@ -48,8 +50,8 @@
 
 							<p:ajax event="rowEdit" listener="#{catMB.onRowEdit}"
 								update=":form:msgs" />
-							<p:ajax event="rowEditCancel"
-								listener="#{catMB.onRowCancel}" update=":form:msgs" />
+							<p:ajax event="rowEditCancel" listener="#{catMB.onRowCancel}"
+								update=":form:msgs" />
 
 							<p:column headerText="#">
 								<p:cellEditor>
@@ -57,8 +59,8 @@
 										<h:outputText value="#{categ.id}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText id="modelInput" value="#{categ.id}" readonly="true"
-											style="width:100%" />
+										<p:inputText id="modelInput" value="#{categ.id}"
+											readonly="true" style="width:100%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
@@ -125,14 +127,13 @@
 						<p:dialog header="Catégorie" widgetVar="catDialog" global="true"
 							showEffect="fade" hideEffect="fade" resizable="false">
 							<p:outputPanel id="catDetail" style="text-align:center;">
-								<p:panelGrid columns="2"
-									rendered="#{not empty catMB.categorie}"
+								<p:panelGrid columns="2" rendered="#{not empty catMB.categorie}"
 									columnClasses="label,value">
 									<f:facet name="header">
-										<p:graphicImage value="#{catMB.categorie.image}"/>
+										<p:graphicImage value="#{catMB.categorie.image}" />
 									</f:facet>
 
-									<h:outputText value="#:" />
+									<h:outputText value="#" />
 									<h:outputText value="#{catMB.categorie.id}" />
 
 									<h:outputText value="Nom:" />
