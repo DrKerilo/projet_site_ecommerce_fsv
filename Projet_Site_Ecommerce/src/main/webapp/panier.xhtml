@@ -42,7 +42,7 @@
 					</p:column>
 
 					<p:column headerText="Operations">
-						<h:commandLink value="Modifier" action="testFab.xml" update="@all">
+						<h:commandLink value="Modifier" action="#{lcMB.updateLCPanier}" update="@all">
 							<f:setPropertyActionListener value="#{pa.produit.id}"
 								target="#{lcMB.pr.id}" />
 							<f:setPropertyActionListener value="#{pa.quantite}"
@@ -60,6 +60,7 @@
 				</p:dataTable>
 
 			</h:form>
+			<h:inputText readonly = "true" style = "color:white; text-align: right" value = "Total : #{lcMB.total}€" />
 
 			<h:link style = "color:white" value="Finaliser la commande" outcome="ajoutClient.xhtml" />
 

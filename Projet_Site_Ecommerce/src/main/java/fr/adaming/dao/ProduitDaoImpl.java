@@ -116,6 +116,8 @@ public class ProduitDaoImpl implements IProduitDao {
 		String req = "FROM Produit p WHERE p.categorie.id = :pId";
 		// Créer le query
 		Query query = s.createQuery(req);
+		// Passage des parametres
+		query.setParameter("pId", cat.getId());
 		// Récupération du résultat
 		List<Produit> listeOut = query.list();
 		// Chargement des images

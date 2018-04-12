@@ -12,7 +12,7 @@ public interface ILigneCommandeService {
 	
 	public List<LigneCommande> getLigneCommande();
 	
-	public double getTotal();
+	public double getTotal(List<LigneCommande> list);
 	
 	public void viderLC();
 

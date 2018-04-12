@@ -102,22 +102,6 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		return lcOut;
 	}
 
-	@Override
-	public double getTotal() {
-		// Ouvrir une session
-		Session s = sf.getCurrentSession();
-		
-		// Requete HQL
-//		String req;
-
-		// Recuperer le query
-//		Query query = s.createQuery(req);
-		
-		// Passage des parametres
-
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void viderLC() {

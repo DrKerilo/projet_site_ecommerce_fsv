@@ -80,11 +80,6 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	}
 
 	@Override
-	public double getTotal() {
-		return lcDao.getTotal();
-	}
-
-	@Override
 	public void viderLC() {
 		lcDao.viderLC();
 	}
@@ -92,6 +87,18 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	@Override
 	public int deleteLC(LigneCommande lc) {
 		return lcDao.supprimerLC(lc);
+	}
+
+	@Override
+	public double getTotal(List<LigneCommande> list) {
+		double somme = 0;
+		
+		for(LigneCommande lc:list){
+			somme = somme + lc.getPrix();
+			System.out.println(somme + " " + lc.getPrix());
+		}
+		
+		return somme;
 	}
 
 }
