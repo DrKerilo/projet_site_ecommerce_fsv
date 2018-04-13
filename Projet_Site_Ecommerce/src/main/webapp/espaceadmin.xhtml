@@ -32,7 +32,9 @@
 
 							<p:commandButton value="Chercher" action="#{pMB.prodByCat}" />
 							<br />
-							<h:graphicImage library="images" name="trump administration GIF-source.gif" style="width:100%;height:auto;margin-top:100px" />
+							<h:graphicImage library="images"
+								name="trump administration GIF-source.gif"
+								style="width:100%;height:auto;margin-top:100px" />
 						</h:form>
 					</div>
 				</p:layoutUnit>
@@ -84,12 +86,15 @@
 
 							<!-- Fonction "Sélection" -->
 							<p:column styleClass="operations-admin">
-								<p:commandButton update=":form:catDetail"
+								<p:commandButton update=":#{p:component('catDetail')}"
 									oncomplete="PF('catDialog').show()" icon="ui-icon-search"
 									title="View">
 									<f:setPropertyActionListener value="#{categ}"
 										target="#{catMB.categorie}" />
 								</p:commandButton>
+
+								<!-- Boîte de dialogue pour la fonction "Sélection" -->
+
 							</p:column>
 							<!-- Fonction "Edition" -->
 							<p:column styleClass="operations-admin">
@@ -113,30 +118,32 @@
 								</p:confirmDialog>
 							</p:column>
 						</p:dataTable>
-
-						<!-- Boîte de dialogue pour la fonction "Sélection" -->
-						<p:dialog header="Catégorie" widgetVar="catDialog" global="true"
-							showEffect="fade" hideEffect="fade" resizable="false"
-							appendTo="@(body)">
-							<p:outputPanel id="catDetail" style="text-align:center;">
-								<p:panelGrid columns="2" rendered="#{not empty catMB.categorie}"
-									columnClasses="label,value">
-									<f:facet name="header">
-										<img src="#{catMB.categorie.image}" />
-									</f:facet>
-
-									<h:outputText value="#" />
-									<h:outputText value="#{catMB.categorie.id}" />
-
-									<h:outputText value="Nom:" />
-									<h:outputText value="#{catMB.categorie.nomCategorie}" />
-
-									<h:outputText value="Description:" />
-									<h:outputText value="#{catMB.categorie.description}" />
-								</p:panelGrid>
-							</p:outputPanel>
-						</p:dialog>
 					</h:form>
+
+
+					<p:dialog header="Catégorie" widgetVar="catDialog" global="true"
+						showEffect="fade" hideEffect="fade" resizable="false"
+						appendTo="@(body)">
+						<p:outputPanel id="catDetail">
+							<p:panelGrid columns="2" rendered="#{not empty catMB.categorie}"
+								columnClasses="label,value">
+
+								<f:facet name="header">
+									<img src="#{catMB.categorie.image}" />
+								</f:facet>
+
+								<h:outputText value="#" />
+								<h:outputText value="#{catMB.categorie.id}" />
+
+								<h:outputText value="Nom:" />
+								<h:outputText value="#{catMB.categorie.nomCategorie}" />
+
+								<h:outputText value="Description:" />
+								<h:outputText value="#{catMB.categorie.description}" />
+							</p:panelGrid>
+						</p:outputPanel>
+					</p:dialog>
+
 				</p:layoutUnit>
 			</p:layout>
 

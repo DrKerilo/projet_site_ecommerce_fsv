@@ -7,7 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+//import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,7 @@ import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
 
 @ManagedBean(name = "catMB")
-@RequestScoped
+@ViewScoped
 public class CategorieManagedBean implements Serializable {
 
 	// Transformation de l'association UML en Java
@@ -174,21 +175,30 @@ public class CategorieManagedBean implements Serializable {
 
 	// Modifier seulement la photo de la catégorie
 	public String modifierPhotoCategorie() {
+		
+		
+		System.out.println("Je suis ici");
 		// Récupérer la catégorie avec l'id
 		categorie = categorieService.getCategorieById(categorie);
 		// Modifier la photo dans la catégorie
 		categorie.setPhoto(uf.getContents());
 		int verif = categorieService.updateCategorie(categorie);
 		if (verif != 0) {
+			System.out.println("Je suis ici");
 			// Récupérer la liste des catégories mises à jour
 			listeCategories = categorieService.getAllCategorie();
 			// Actualiser la liste dans la session
 			session.setAttribute("listeCat", listeCategories);
-			return "espaceadmin";
+			return "ajoutadmin";
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie n'a pas été modifiée."));
 			return "ajoutadmin";
 		}
+	}
+	
+	// Redirection test
+	public String testNavig(){
+		return "accueil";
 	}
 }
