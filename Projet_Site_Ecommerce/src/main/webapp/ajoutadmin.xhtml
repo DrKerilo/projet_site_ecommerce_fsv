@@ -51,6 +51,7 @@
 							<p:inputText value="#{pMB.produit.quantite}" />
 							<h:outputLabel for="nameCat" value="Catégorie du produit:" />
 							<p:selectOneMenu value="#{pMB.cat.id}">
+								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
 								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
 									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 							</p:selectOneMenu>
@@ -70,6 +71,7 @@
 						<h:panelGrid columns="2">
 							<h:outputLabel for="nameCat" value="Catégorie:" />
 							<p:selectOneMenu value="#{catMB.categorie.id}">
+								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
 								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
 									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 							</p:selectOneMenu>
@@ -86,17 +88,27 @@
 				<p:tab title="Modifier la photo d'un produit">
 					<h:form enctype="multipart/form-data">
 						<p:growl id="growlprod" summary="true" life="3000" />
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel for="nameCat" value="Catégorie:" />
-							<p:selectOneMenu value="#{catMB.categorie.id}">
+							<p:selectOneMenu value="#{pMB.cat.id}">
+								<p:ajax listener="#{pMB.onCategChange}" update="nameProd"/>
+								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
 								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
 									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 							</p:selectOneMenu>
+							
+							<h:outputLabel for="nameProd" value="Produit:" />
+							<p:selectOneMenu value="#{pMB.produit.id}" id="nameProd">
+								<f:selectItem itemLabel="Choisir le produit" itemValue="" />
+								<f:selectItems value="#{pMB.listeProduit}" var="prod"
+									itemLabel="#{prod.nomProduit}" itemValue="#{prod.id}" />
+							</p:selectOneMenu>
+							
 							<h:outputLabel for="upPhoto" value="Nouvelle photo:" />
-							<p:fileUpload id="upPhoto" value="#{catMB.uf}" mode="simple"
+							<p:fileUpload id="upPhoto" value="#{pMB.uf}" mode="simple"
 								skinSimple="true" label="Choisir photo" />
 							<p:commandButton value="Modifier photo" ajax="false"
-								update="growlprod" action="#{catMB.modifierPhotoCategorie}" />
+								update="growlprod" action="#{pMB.modifierPhotoProduit}" />
 						</h:panelGrid>
 					</h:form>
 				</p:tab>

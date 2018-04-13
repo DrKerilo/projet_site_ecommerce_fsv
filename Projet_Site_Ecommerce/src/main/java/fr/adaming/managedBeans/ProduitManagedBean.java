@@ -165,4 +165,29 @@ public class ProduitManagedBean implements Serializable {
 		FacesMessage msg = new FacesMessage("Modification annulée", ((Produit) event.getObject()).getNomProduit());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+
+	// Modifier seulement la photo d'un produit
+	public String modifierPhotoProduit() {
+		// Récupérer la catégorie avec l'id
+		produit = produitService.rechercherProduit(produit);
+		// Modifier la photo dans la catégorie
+		produit.setPhoto(uf.getContents());
+		int verif = produitService.updateProduit(produit, cat);
+		if (verif != 0) {
+			return "espaceadmin";
+		} else {
+			// Si erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'a pas été modifié."));
+			return "ajoutadmin";
+		}
+	}
+	
+	public void onCategChange(){
+		if(cat!=null && !cat.equals("")){
+			listeProduit=produitService.produitByCategorie(cat);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sélectionné", produit.getNomProduit()+" de "+cat.getNomCategorie()));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Invalide", "Produit non sélectionné"));
+		}
+	}
 }
