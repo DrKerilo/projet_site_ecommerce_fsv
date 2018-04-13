@@ -16,38 +16,59 @@
 		<!-- Modifier la partie corps -->
 		<ui:define name="bodyFront">
 
-
 			<h1 style="color: coral; text-align: center">Produits de la
 				catégorie</h1>
 
 			<h:form>
+				<p:outputLabel for="categ" value="Afficher les produits de:" />
+				<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
+					style="width:125px">
+					<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
+					<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+						itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+				</p:selectOneMenu>
+				<br />
+				<h:outputText value="#{categ.id}" />
+
+				<p:commandButton value="Rechercher" action="#{pMB.prodByCat}" update ="@all"/>
+				
+			</h:form>
+
+			<h:form>
 				<h:panelGrid columns="2">
-			 <p style = "color:white"> Numéro catégorie : <h:inputText value="#{pMB.cat.id}" /> </p>
+					<p style="color: white">
+						Numéro catégorie :
+						<h:inputText value="#{pMB.cat.id}" />
+					</p>
 					<h:commandButton action="#{pMB.prodByCat}" value="Rechercher" />
 
 				</h:panelGrid>
 			</h:form>
-			
-			<br/>
+
+			<br />
 
 
 			<h:form>
-				<p:dataTable var="produit" value="#{pMB.listeProduit}" rows="10"
+				<p:dataTable var="produit" value="#{pMB.listeProduit}" rows="5"
+					scrollable="true" rowsPerPageTemplate="5,10,15" scrollHeight="150"
 					paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,15">
-
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
 					<p:column headerText="ID Produit">
 						<h:outputText value="#{produit.id}" />
 					</p:column>
 
-					<p:column headerText="Produit">
+					<p:column headerText="Produit" filterBy="#{produit.nomProduit}"
+						footerText="contient" filterMatchMode="contains">
 						<h:outputText value="#{produit.nomProduit}" />
 					</p:column>
 
+					<!-- 					<p:column headerText="Quantité"> -->
+					<!-- 						<h:inputText value="#{lcMB.lc.quantite}" /> -->
+					<!-- 					</p:column> -->
+
 					<p:column headerText="Quantité">
-						<h:inputText value="#{lcMB.lc.quantite}" />
+						<h:inputText value="#{produit.quantite}" />
 					</p:column>
 
 					<p:column headerText="Prix">
@@ -58,8 +79,10 @@
 				Détails article | 
 								<h:commandLink value="Modifier le panier"
 							action="#{lcMB.updateLC}">
-							<f:setPropertyActionListener value="#{lcMB.lc.quantite}"
+							<f:setPropertyActionListener value="#{produit.quantite}"
 								target="#{lcMB.lc.quantite}" />
+							<!-- 							<f:setPropertyActionListener value="#{lcMB.lc.quantite}" -->
+							<!-- 								target="#{lcMB.lc.quantite}" /> -->
 							<f:setPropertyActionListener value="#{produit.id}"
 								target="#{lcMB.pr.id}" />
 						</h:commandLink>

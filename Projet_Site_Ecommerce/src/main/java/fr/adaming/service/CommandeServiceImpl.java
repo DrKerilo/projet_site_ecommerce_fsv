@@ -46,8 +46,27 @@ public class CommandeServiceImpl implements ICommandeService {
 
 		try {
 			Document document = new Document(PageSize.A4, 75, 75, 75, 75);
+			
+			
+			StringBuilder sOut = new StringBuilder();
+			String input = System.getProperty("user.home");
+			for (int i = 0; i < input.length(); i++) {
+				if (i > 0 && input.charAt(i) == '\\') {
+					
+					sOut.append("\\");
+				}
+				sOut.append(input.charAt(i));
+			}
+			
+			sOut.append("\\\\Desktop\\\\PdfCommande" + co.getId() + ".pdf");
+			
+			String path = sOut.toString();
+			System.out.println(path);
+			
+			
 			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream("C:\\Users\\inti0343\\Desktop\\Formation\\PdfCommande" + co.getId() + ".pdf"));
+					new FileOutputStream(path));
+//			new FileOutputStream("C:\\Users\\inti0343\\Desktop\\Formation\\PdfCommande" + co.getId() + ".pdf"));
 			document.open();
 
 			Paragraph titre = new Paragraph("Facture de la commande " + co.getId(), FontFactory
@@ -93,7 +112,7 @@ public class CommandeServiceImpl implements ICommandeService {
 			document.add(indic2);
 
 			Paragraph indic3 = new Paragraph(
-					"Tot Store vous remercie de votre confiance et vous souhaite une bonne journée.",
+					"Toto Store vous remercie de votre confiance et vous souhaite une bonne journée.",
 					FontFactory.getFont(FontFactory.HELVETICA));
 			indic3.setSpacingAfter(5);
 			document.add(indic3);
@@ -101,7 +120,6 @@ public class CommandeServiceImpl implements ICommandeService {
 			document.close();
 
 		} catch (FileNotFoundException | DocumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
