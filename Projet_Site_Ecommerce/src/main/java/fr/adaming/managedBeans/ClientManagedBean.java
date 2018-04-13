@@ -92,12 +92,13 @@ public class ClientManagedBean implements Serializable{
 			
 			double total = lcService.getTotal(liste);
 			
-			// TODO inserer la fonction PDF
+			// Générer le PDF et envoyer un mail de confirmation
 			commandeService.bilanPDF(commande, total);
 			
 			commandeService.envoyerMail(commande);
 			
-//			lcService.viderLC();
+			// Vider la BD après commande
+			lcService.viderLC();
 			
 			return "commande";
 		} else {
