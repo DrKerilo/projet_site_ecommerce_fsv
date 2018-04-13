@@ -18,7 +18,9 @@
 			<h1 style="color: coral; text-align: center">Mon panier</h1>
 
 			<h:form>
-				<p:dataTable var="pa" value="#{sessionScope.panier}">
+				<p:dataTable var="pa" value="#{sessionScope.panier}" rows="5"
+					scrollable="true" rowsPerPageTemplate="5,10,15" scrollHeight="150" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
 
 					<p:column headerText="ID Produit">
@@ -63,7 +65,7 @@
 			</h:form>
 			<div style="text-align: right">
 				<h:outputText style="color:white; text-align: right"
-					value="Total : #{lcMB.total}€" />
+					value="Total : #{lcMB.total}€      " />
 			</div>
 
 			<br />

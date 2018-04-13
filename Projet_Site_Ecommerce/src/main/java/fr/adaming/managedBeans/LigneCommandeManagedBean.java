@@ -8,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -50,10 +49,10 @@ public class LigneCommandeManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		
+
 		List<LigneCommande> liste = lCommandeService.getLigneCommande();
 		this.maSession.setAttribute("panier", liste);
-		
+
 		total = lCommandeService.getTotal(liste);
 	}
 
@@ -73,7 +72,6 @@ public class LigneCommandeManagedBean implements Serializable {
 	public void setPr(Produit pr) {
 		this.pr = pr;
 	}
-	
 
 	public double getTotal() {
 		return total;
@@ -82,65 +80,68 @@ public class LigneCommandeManagedBean implements Serializable {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
 
 	// Méthodes metiers
-	public String updateLC(){
+	public String updateLC() {
 		System.out.println("Ligne commande " + lc);
 		System.out.println("Produit " + pr);
-		
+
 		int verif = lCommandeService.updateLC(lc, pr);
-		
-		if(verif != 0){
+
+		if (verif != 0) {
 			List<LigneCommande> liste = lCommandeService.getLigneCommande();
 			this.maSession.setAttribute("panier", liste);
-			
+
 			total = lCommandeService.getTotal(liste);
 			System.out.println("Le total est de :" + total);
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Erreur au cours de la modification du panier"));
 		}
-		
-//		lc.setQuantite(0);
+
+		// lc.setQuantite(0);
 		return "clientProduitsParCat";
 	}
-	
-	public String updateLCPanier(){
-		
+
+	public String updateLCPanier() {
+
 		int verif = lCommandeService.updateLC(lc, pr);
-		
-		if(verif != 0){
+
+		if (verif != 0) {
 			List<LigneCommande> liste = lCommandeService.getLigneCommande();
 			this.maSession.setAttribute("panier", liste);
-			
+
 			total = lCommandeService.getTotal(liste);
-			
+
 		} else {
-			
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Erreur au cours de la modification du panier"));
 		}
-		lc.setQuantite(0);
+
+//		lc.setQuantite(0);
 		return "panier";
 	}
-	
-	public String supprimerLC(){
+
+	public String supprimerLC() {
 		lc.setQuantite(0);
-		
+
 		System.out.println(pr);
 		System.out.println(lc);
-		
+
 		int verif = lCommandeService.updateLC(lc, pr);
-		
-		if(verif == 0){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
+
+		if (verif == 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Erreur au cours de la modification du panier"));
 		} else {
 			List<LigneCommande> liste = lCommandeService.getLigneCommande();
 			this.maSession.setAttribute("panier", liste);
-			
+
 			total = lCommandeService.getTotal(liste);
 		}
-		lc.setQuantite(0);
-		
+//		lc.setQuantite(0);
+
 		return "panier";
 
 	}
