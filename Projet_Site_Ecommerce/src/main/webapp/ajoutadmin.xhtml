@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Facelet</title>
+	<title>Facelet</title>
 </h:head>
 <h:body>
 	<!-- Inclure le template dans la page avec possibilité de modification -->
@@ -15,25 +15,28 @@
 		<!-- Modifier la partie "body.html" -->
 		<ui:define name="bodyAdmin">
 			<p:tabView style="height:100%">
+
+				<!-- Ajout d'une catégorie -->
 				<p:tab title="Ajouter une catégorie">
 					<h:form enctype="multipart/form-data">
 						<p:growl id="growlcat" summary="true" life="3000" />
 						<h:panelGrid columns="2">
 							<h:outputLabel for="nameCat" value="Nom de la catégorie:" />
-							<p:inputText id="nameCat"
-								value="#{catMB.categorie.nomCategorie}" />
+							<p:inputText id="nameCat" value="#{catMB.categorie.nomCategorie}" />
 							<h:outputLabel for="descCat" value="Description" />
-							<p:inputText id="descCat"
-								value="#{catMB.categorie.description}" />
+							<p:inputText id="descCat" value="#{catMB.categorie.description}" />
 							<h:outputLabel for="upPhoto" value="Photo:" />
-							<p:fileUpload id="upPhoto" value="#{catMB.uf}"
-								mode="simple" skinSimple="true" label="Choisir photo" />
+							<p:fileUpload id="upPhoto" value="#{catMB.uf}" mode="simple"
+								skinSimple="true" label="Choisir photo" />
 							<p:commandButton value="Ajouter Catégorie"
-								action="#{catMB.ajouterCategorie}" ajax="false" update="growlcat" />
+								action="#{catMB.ajouterCategorie}" ajax="false"
+								update="growlcat" />
 						</h:panelGrid>
 					</h:form>
 					<h:messages style="color:red" />
 				</p:tab>
+
+				<!-- Ajout d'un produit -->
 				<p:tab title="Ajouter un produit">
 					<h:form enctype="multipart/form-data">
 						<p:growl id="growlprod" summary="true" life="3000" />
@@ -56,6 +59,44 @@
 								skinSimple="true" label="Choisir photo" />
 							<p:commandButton value="Ajouter" ajax="false" update="growlprod"
 								action="#{pMB.ajouterProd}" />
+						</h:panelGrid>
+					</h:form>
+				</p:tab>
+
+				<!-- Modification de la photo d'une catégorie -->
+				<p:tab title="Modifier la photo d'une catégorie">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="growlprod" summary="true" life="3000" />
+						<h:panelGrid columns="2">
+							<h:outputLabel for="nameCat" value="Catégorie:" />
+							<p:selectOneMenu value="#{catMB.categorie.id}">
+								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+							</p:selectOneMenu>
+							<h:outputLabel for="upPhoto" value="Nouvelle photo:" />
+							<p:fileUpload id="upPhoto" value="#{catMB.uf}" mode="simple"
+								skinSimple="true" label="Choisir photo" />
+							<p:commandButton value="Modifier photo" ajax="false"
+								update="growlprod" action="#{catMB.modifierPhotoCategorie}" />
+						</h:panelGrid>
+					</h:form>
+				</p:tab>
+
+				<!-- Modification de la photo d'un produit -->
+				<p:tab title="Modifier la photo d'une catégorie">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="growlprod" summary="true" life="3000" />
+						<h:panelGrid columns="2">
+							<h:outputLabel for="nameCat" value="Catégorie:" />
+							<p:selectOneMenu value="#{catMB.categorie.id}">
+								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+							</p:selectOneMenu>
+							<h:outputLabel for="upPhoto" value="Nouvelle photo:" />
+							<p:fileUpload id="upPhoto" value="#{catMB.uf}" mode="simple"
+								skinSimple="true" label="Choisir photo" />
+							<p:commandButton value="Modifier photo" ajax="false"
+								update="growlprod" action="#{catMB.modifierPhotoCategorie}" />
 						</h:panelGrid>
 					</h:form>
 				</p:tab>

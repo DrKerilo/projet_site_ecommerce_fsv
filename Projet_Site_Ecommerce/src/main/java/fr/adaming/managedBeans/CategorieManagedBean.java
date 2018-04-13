@@ -96,7 +96,7 @@ public class CategorieManagedBean implements Serializable {
 		this.session.setAttribute("listeCat", listeCategories);
 		return "categories";
 	}
-	
+
 	// Ajout catégorie
 	public String ajouterCategorie() {
 		// Ajouter la photo dans la catégorie
@@ -170,5 +170,25 @@ public class CategorieManagedBean implements Serializable {
 	public void onRowCancel(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Modification annulée", ((Categorie) event.getObject()).getNomCategorie());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	// Modifier seulement la photo de la catégorie
+	public String modifierPhotoCategorie() {
+		// Récupérer la catégorie avec l'id
+		categorie = categorieService.getCategorieById(categorie);
+		// Modifier la photo dans la catégorie
+		categorie.setPhoto(uf.getContents());
+		int verif = categorieService.updateCategorie(categorie);
+		if (verif != 0) {
+			// Récupérer la liste des catégories mises à jour
+			listeCategories = categorieService.getAllCategorie();
+			// Actualiser la liste dans la session
+			session.setAttribute("listeCat", listeCategories);
+			return "espaceadmin";
+		} else {
+			// Si erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie n'a pas été modifiée."));
+			return "ajoutadmin";
+		}
 	}
 }
