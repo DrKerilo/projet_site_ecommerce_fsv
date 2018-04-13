@@ -20,7 +20,7 @@
 				<p:tab title="Ajouter une catégorie">
 					<h:form enctype="multipart/form-data">
 						<p:growl id="growlcat" summary="true" life="3000" />
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel for="nameCat" value="Nom de la catégorie:" />
 							<p:inputText id="nameCat" value="#{catMB.categorie.nomCategorie}" />
 							<h:outputLabel for="descCat" value="Description" />
@@ -40,7 +40,7 @@
 				<p:tab title="Ajouter un produit">
 					<h:form enctype="multipart/form-data">
 						<p:growl id="growlprod" summary="true" life="3000" />
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel for="nameCat" value="Nom du produit:" />
 							<p:inputText value="#{pMB.produit.nomProduit}" />
 							<h:outputLabel for="nameCat" value="Description:" />
@@ -68,7 +68,7 @@
 				<p:tab title="Modifier la photo d'une catégorie">
 					<h:form enctype="multipart/form-data">
 						<p:growl id="growlprod" summary="true" life="3000" />
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel for="nameCat" value="Catégorie:" />
 							<p:selectOneMenu value="#{catMB.categorie.id}">
 								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />

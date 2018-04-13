@@ -28,7 +28,7 @@
 									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 							</p:selectOneMenu>
 							<h:outputText value="#{categ.id}" />
-
+							<br/>
 							<p:commandButton value="Chercher" action="#{pMB.prodByCat}"
 								update="@all" />
 							<br/>
@@ -145,7 +145,7 @@
 								<p:panelGrid columns="2" rendered="#{not empty pMB.produit}"
 									columnClasses="label,value">
 									<f:facet name="header">
-										<img src="#{pMB.produit.image}" />
+										<img src="#{pMB.produit.image}" style="width:350px;height:auto"/>
 									</f:facet>
 
 									<h:outputText value="#" />

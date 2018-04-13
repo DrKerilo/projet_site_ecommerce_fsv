@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Catégories</title>
+</h:head>
+<h:body>
+
+
+	<!-- Inclure le templace dans la page accueil avec possibilité de modification -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie "body.html" -->
+		<ui:define name="bodyFront">
+			<p:layout style="width:100%;height:100%">
+
+				<!-- Menu sur la partie gauche de la page -->
+				<p:layoutUnit position="west" size="300">
+					<div style="padding: 10px">
+						<h:form>
+							<p:outputLabel for="categ" value="Afficher les produits de:" />
+							<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
+								style="width:125px">
+								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
+								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+							</p:selectOneMenu>
+							<h:outputText value="#{categ.id}" />
+							<br />
+							<p:commandButton value="Chercher" action="#{pMB.prodByCat}" />
+						</h:form>
+					</div>
+				</p:layoutUnit>
+
+				<!-- Affichage des catégories sur la partie droite de la page -->
+				<p:layoutUnit position="center">
+					<h:form id="form">
+						<p:growl id="msgs" showDetail="true" />
+						<p:carousel value="#{sessionScope.listeCat}"
+							headerText="Liste des catégories" var="categ"
+							itemStyle="text-align:center" responsive="true">
+							<p:panelGrid columns="1" style="width:100%;margin:10px 0px"
+								columnClasses="label,value" layout="grid"
+								styleClass="ui-panelgrid-blank">
+								<f:facet name="header">
+									<img src="#{categ.image}" />
+								</f:facet>
+
+								<h:outputText value="#{categ.nomCategorie}"
+									style="font-weight:bold;font-size:1.2em" />
+
+								<h:outputText value="#{categ.description}" />
+
+								<p:commandButton value="Chercher" action="#{pMB.prodByCat}">
+									<f:setPropertyActionListener value="#{categ.id}"
+										target="#{pMB.cat.id}"></f:setPropertyActionListener>
+								</p:commandButton>
+							</p:panelGrid>
+						</p:carousel>
+					</h:form>
+				</p:layoutUnit>
+			</p:layout>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>
