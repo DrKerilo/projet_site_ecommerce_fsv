@@ -9,5 +9,7 @@ import fr.adaming.model.LigneCommande;
 public interface ICommandeService {
 	public Commande finaliserCommande(List<LigneCommande> liste, Client cl);
 	
-	void bilanPDF(Commande co, double total);
+	public void bilanPDF(Commande co, double total);
+	
+	public void envoyerMail(Commande co);
 }

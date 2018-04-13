@@ -1,8 +1,25 @@
 package fr.adaming.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,36 +63,35 @@ public class CommandeServiceImpl implements ICommandeService {
 
 		try {
 			Document document = new Document(PageSize.A4, 75, 75, 75, 75);
-			
-			
+
 			StringBuilder sOut = new StringBuilder();
 			String input = System.getProperty("user.home");
 			for (int i = 0; i < input.length(); i++) {
 				if (i > 0 && input.charAt(i) == '\\') {
-					
+
 					sOut.append("\\");
 				}
 				sOut.append(input.charAt(i));
 			}
-			
+
 			sOut.append("\\\\Desktop\\\\PdfCommande" + co.getId() + ".pdf");
-			
+
 			String path = sOut.toString();
 			System.out.println(path);
-			
-			
-			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream(path));
-//			new FileOutputStream("C:\\Users\\inti0343\\Desktop\\Formation\\PdfCommande" + co.getId() + ".pdf"));
+
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path));
+			// new
+			// FileOutputStream("C:\\Users\\inti0343\\Desktop\\Formation\\PdfCommande"
+			// + co.getId() + ".pdf"));
 			document.open();
 
-			Paragraph titre = new Paragraph("Facture de la commande " + co.getId(), FontFactory
+			Paragraph titre = new Paragraph("Toto Store\nFacture de la commande n°" + co.getId(), FontFactory
 					.getFont(FontFactory.HELVETICA_BOLD, 18, Font.UNDERLINE, new CMYKColor(54, 255, 201, 0)));
 			titre.setSpacingAfter(20);
 			document.add(titre);
 
 			Paragraph sousTitre1 = new Paragraph(
-					"Client : " + co.getClient().getNomClient() + " \n" + co.getClient().getAdresse() + "\n"
+					"Client : \n" + co.getClient().getNomClient() + " \n" + co.getClient().getAdresse() + "\n"
 							+ co.getClient().getTel() + "\n" + co.getClient().getEmail(),
 					FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 15));
 			sousTitre1.setSpacingAfter(10);
@@ -123,6 +139,87 @@ public class CommandeServiceImpl implements ICommandeService {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void envoyerMail(Commande co) {
+		String mailRecup = co.getClient().getEmail();
+
+		// TODO Auto-generated method stub
+		final String username = "clear.skies928@gmail.com";
+		final String password = /* Ne soyez pas trop curieux ! */ 																																												"BubblyClouds8";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		// Get Session object.
+		Session session = Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		try {
+
+			// Create a default MimeMessage object.
+			Message message = new MimeMessage(session);
+			Multipart multipart = new MimeMultipart();
+
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress("clear.skies928@gmail.com"));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(mailRecup));
+
+			// Set Subject: header field
+			message.setSubject("Validation de votre commande chez Toto Store - Commande n°" + co.getId());
+
+			MimeBodyPart messageBodyPart = new MimeBodyPart();
+			messageBodyPart.setContent(
+					"Bonjour M. ou Mme " + co.getClient().getNomClient() + ",<br/> "
+					+ "Nous vous remercions pour votre achat chez Toto Store. "
+							+ "Celle-ci a bien été prise en compte par nos services et vous sera délivrée sous un délai de 5 jours ouvrés.<br/>"
+							+ "Veuillez trouver ci-joint la facture de votre commande n°" + co.getId() + "<br/><br/>"
+							+ "En esperant vous revoir bientôt sur notre site, <br/> " + "Toto Store - service client",
+					"text/html");
+
+			// creates body part for the attachment
+			MimeBodyPart attachPart = new MimeBodyPart();
+			
+			StringBuilder sOut = new StringBuilder();
+			String input = System.getProperty("user.home");
+			for (int i = 0; i < input.length(); i++) {
+				if (i > 0 && input.charAt(i) == '\\') {
+
+					sOut.append("\\");
+				}
+				sOut.append(input.charAt(i));
+			}
+
+			sOut.append("\\\\Desktop\\\\PdfCommande" + co.getId() + ".pdf");
+			
+
+			String attachFile = sOut.toString();
+
+			DataSource source = new FileDataSource(attachFile);
+			attachPart.setDataHandler(new DataHandler(source));
+			attachPart.setFileName(new File(attachFile).getName());
+
+			// adds parts to the multipart
+			multipart.addBodyPart(messageBodyPart);
+			multipart.addBodyPart(attachPart);
+
+			// sets the multipart as message's content
+			message.setContent(multipart);
+
+			// Send message
+			Transport.send(message, message.getAllRecipients());
+			System.out.println("Sent message successfully....");
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+		}
 	}
 
 }

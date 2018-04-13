@@ -95,6 +95,8 @@ public class ClientManagedBean implements Serializable{
 			// TODO inserer la fonction PDF
 			commandeService.bilanPDF(commande, total);
 			
+			commandeService.envoyerMail(commande);
+			
 //			lcService.viderLC();
 			
 			return "commande";
