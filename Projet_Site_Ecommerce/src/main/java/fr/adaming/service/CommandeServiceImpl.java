@@ -67,7 +67,7 @@ public class CommandeServiceImpl implements ICommandeService {
 			indic1.setSpacingAfter(5);
 			document.add(indic1);
 
-			PdfPTable poAv = new PdfPTable(5);
+			PdfPTable poAv = new PdfPTable(4);
 			poAv.setSpacingAfter(10);
 			poAv.addCell("Produit");
 			poAv.addCell("Prix à l'unité");
@@ -75,12 +75,13 @@ public class CommandeServiceImpl implements ICommandeService {
 			poAv.addCell("Prix");
 
 			for (LigneCommande ligne : co.getListeLignesCommandes()) {
+				System.out.println(ligne);
 				Produit produit = ligne.getProduit();
 
 				poAv.addCell(String.valueOf(produit.getNomProduit()));
-				poAv.addCell(String.valueOf(produit.getPrix()));
+				poAv.addCell(String.valueOf(produit.getPrix()) + "€");
 				poAv.addCell(String.valueOf(ligne.getQuantite()));
-				poAv.addCell(String.valueOf(ligne.getPrix()));
+				poAv.addCell(String.valueOf(ligne.getPrix()) + "€");
 			}
 
 			document.add(poAv);
@@ -92,7 +93,7 @@ public class CommandeServiceImpl implements ICommandeService {
 			document.add(indic2);
 
 			Paragraph indic3 = new Paragraph(
-					"Nous vous remercions de votre confiance et vous souhaitons une bonne journée.",
+					"Tot Store vous remercie de votre confiance et vous souhaite une bonne journée.",
 					FontFactory.getFont(FontFactory.HELVETICA));
 			indic3.setSpacingAfter(5);
 			document.add(indic3);
