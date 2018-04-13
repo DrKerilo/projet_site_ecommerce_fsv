@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
 import org.primefaces.model.UploadedFileWrapper;
 
@@ -26,7 +27,7 @@ public class ProduitManagedBean implements Serializable {
 	// Transformation de l'association UML en JAVA
 	@ManagedProperty(value = "#{pService}")
 	private IProduitService produitService;
-	
+
 	// TODO en attente de produit
 	@ManagedProperty(value = "#{catService}")
 	private ICategorieService categorieService;
@@ -35,12 +36,10 @@ public class ProduitManagedBean implements Serializable {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
-	
+
 	public void setCategorieService(ICategorieService categorieService) {
 		this.categorieService = categorieService;
 	}
-
-
 
 	// Les attribut transférés à la page
 	private Produit produit;
@@ -142,15 +141,28 @@ public class ProduitManagedBean implements Serializable {
 
 		if (listeProduit != null) {
 			// TODO nom de la page
-			return "clientProduitsParCat";
+			return "success";
 		} else {
 			// TODO nom de la page
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Pas de produit associé à la catégorie " + cat.getId()));
 
-			return "clientProduitsParCat";
+			return "fail";
 
 		}
 	}
 
+	// Modification de la catégorie avec rowEditor
+	public void onRowEdit(RowEditEvent event) {
+		produitService.updateProduit((Produit) event.getObject(), this.cat);
+		listeProduit = produitService.getlisteProduit();
+		maSession.setAttribute("listeProduits", listeProduit);
+		FacesMessage msg = new FacesMessage("Produit modifié", ((Produit) event.getObject()).getNomProduit());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Modification annulée", ((Produit) event.getObject()).getNomProduit());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 }

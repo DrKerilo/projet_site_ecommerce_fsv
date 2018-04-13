@@ -18,7 +18,7 @@
 
 				<!-- Menu sur la partie gauche de la page -->
 				<p:layoutUnit position="west" size="300">
-					<div style="padding:10px">
+					<div style="padding: 10px">
 						<h:form>
 							<p:outputLabel for="categ" value="Afficher les produits de:" />
 							<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
@@ -31,6 +31,8 @@
 							<h:outputText value="#{categ.id}" />
 
 							<p:commandButton value="Chercher" action="#{pMB.prodByCat}" />
+							<br />
+							<h:graphicImage library="images" name="trump administration GIF-source.gif" style="width:100%;height:auto;margin-top:100px" />
 						</h:form>
 					</div>
 				</p:layoutUnit>
@@ -41,7 +43,8 @@
 						<p:growl id="msgs" showDetail="true" />
 
 						<p:dataTable var="categ" value="#{sessionScope.listeCat}"
-							editable="true" style="margin-bottom:20px;width:100%" rows="10"
+							editable="true"
+							style="margin-bottom:20px;width:100%;text-align:center" rows="10"
 							paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							<f:facet name="header">
@@ -52,18 +55,6 @@
 								update=":form:msgs" />
 							<p:ajax event="rowEditCancel" listener="#{catMB.onRowCancel}"
 								update=":form:msgs" />
-
-							<p:column headerText="#">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{categ.id}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText id="modelInput" value="#{categ.id}"
-											readonly="true" style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
 
 							<p:column headerText="Nom">
 								<p:cellEditor>
@@ -125,7 +116,8 @@
 
 						<!-- Boîte de dialogue pour la fonction "Sélection" -->
 						<p:dialog header="Catégorie" widgetVar="catDialog" global="true"
-							showEffect="fade" hideEffect="fade" resizable="false">
+							showEffect="fade" hideEffect="fade" resizable="false"
+							appendTo="@(body)">
 							<p:outputPanel id="catDetail" style="text-align:center;">
 								<p:panelGrid columns="2" rendered="#{not empty catMB.categorie}"
 									columnClasses="label,value">

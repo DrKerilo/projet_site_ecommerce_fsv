@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Espace administrateur</title>
+</h:head>
+<h:body>
+	<!-- Inclure le templace dans la page avec possibilité de modification -->
+	<ui:composition template="/resources/templates/layoutadmin.xhtml">
+		<!-- Modifier la partie "body.html" -->
+		<ui:define name="bodyAdmin">
+			<p:layout style="width:100%;height:100%">
+
+				<!-- Menu sur la partie gauche de la page -->
+				<p:layoutUnit position="west" size="300">
+					<div style="padding: 10px">
+						<h:form>
+							<p:outputLabel for="categ" value="Afficher les produits de:" />
+							<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
+								style="width:125px">
+								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
+								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+							</p:selectOneMenu>
+							<h:outputText value="#{categ.id}" />
+
+							<p:commandButton value="Chercher" action="#{pMB.prodByCat}"
+								update="@all" />
+							<br/>
+							<h:graphicImage library="images" name="trump administration GIF-source.gif" style="width:100%;height:auto;margin-top:100px" />
+						</h:form>
+					</div>
+				</p:layoutUnit>
+
+				<!-- Affichage des produits correspondant à la catégorie choisie -->
+				<p:layoutUnit position="center">
+					<h:form id="form">
+						<p:growl id="msgs" showDetail="true" />
+
+						<p:dataTable id="prod1" var="prod" value="#{pMB.listeProduit}"
+							editable="true"
+							style="margin-bottom:20px;width:100%;text-align:center" rows="10"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+							<f:facet name="header">
+           						Produits
+       						</f:facet>
+
+							<p:ajax event="rowEdit" listener="#{pMB.onRowEdit}"
+								update=":form:msgs" />
+							<p:ajax event="rowEditCancel" listener="#{pMB.onRowCancel}"
+								update=":form:msgs" />
+
+							<p:column headerText="Nom">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{prod.nomProduit}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{prod.nomProduit}" style="width:100%"
+											label="Nom" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Description">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{prod.description}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{prod.description}" style="width:100%"
+											label="Description" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Prix">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{prod.prix}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{prod.prix}" style="width:100%"
+											label="Prix" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Quantité en stock">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{prod.quantite}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{prod.quantite}" style="width:100%"
+											label="Quantité" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<!-- A rajouter plus tard : photos ! -->
+							<!-- Fonction "Sélection" -->
+							<p:column styleClass="operations-admin">
+								<p:commandButton update=":form:prodDetail"
+									oncomplete="PF('prodDialog').show()" icon="ui-icon-search"
+									title="View">
+									<f:setPropertyActionListener value="#{prod}"
+										target="#{pMB.produit}" />
+								</p:commandButton>
+							</p:column>
+							<!-- Fonction "Edition" -->
+							<p:column styleClass="operations-admin">
+								<p:rowEditor />
+							</p:column>
+							<!-- Fonction "Suppression" + confirm dialog -->
+							<p:column styleClass="operations-admin">
+								<p:commandButton icon="ui-icon-closethick"
+									action="#{pMB.supprimerProd}" update="@all">
+									<f:setPropertyActionListener value="#{prod.id}"
+										target="#{pMB.produit.id}" />
+									<p:confirm header="Confirmation" message="Êtes-vous sûr ?"
+										icon="ui-icon-alert" />
+								</p:commandButton>
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Oui" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Non" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+							</p:column>
+						</p:dataTable>
+
+						<!-- Boîte de dialogue pour la fonction "Sélection" -->
+						<p:dialog header="Produit" widgetVar="prodDialog" global="true"
+							showEffect="fade" hideEffect="fade" resizable="false"
+							appendTo="@(body)">
+							<p:outputPanel id="prodDetail" style="text-align:center;">
+								<p:panelGrid columns="2" rendered="#{not empty pMB.produit}"
+									columnClasses="label,value">
+									<f:facet name="header">
+										<img src="#{pMB.produit.image}" />
+									</f:facet>
+
+									<h:outputText value="#" />
+									<h:outputText value="#{pMB.produit.id}" />
+
+									<h:outputText value="Nom:" />
+									<h:outputText value="#{pMB.produit.nomProduit}" />
+
+									<h:outputText value="Description:" />
+									<h:outputText value="#{pMB.produit.description}" />
+
+									<h:outputText value="Prix:" />
+									<h:outputText value="#{pMB.produit.prix}" />
+
+									<h:outputText value="Quantité en stock:" />
+									<h:outputText value="#{pMB.produit.quantite}" />
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
+					</h:form>
+				</p:layoutUnit>
+			</p:layout>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

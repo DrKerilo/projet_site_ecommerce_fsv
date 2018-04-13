@@ -14,28 +14,33 @@
 	<ui:composition>
 		<h:form>
 			<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
-				title="login" style="text-decoration:none;color:#DDDDDD;font-family:Century Gothic;font-weight:bold">
+				title="login"
+				style="text-decoration:none;color:#DDDDDD;font-family:Century Gothic;font-weight:bold">
 				<span>Accès à l'espace administrateur</span>
 			</h:outputLink>
 
 			<p:growl id="growl" summary="true" life="3000" />
 
 			<p:dialog header="Authentification" widgetVar="dlg" resizable="false">
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="username" value="Identifiant:" />
-					<p:inputText id="username" value="#{aMB.admin.mail}"
-						required="true" label="username" />
+				<h:graphicImage library="images" name="boss GIF-source.gif"
+					style="width:100%;height:auto;" />
+				<div align="center">
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputLabel for="username" value="Identifiant:" />
+						<p:inputText id="username" value="#{aMB.admin.mail}"
+							required="true" label="username" />
 
-					<h:outputLabel for="password" value="Mot de passe:" />
-					<p:password id="password" value="#{aMB.admin.mdp}"
-						required="true" label="password" />
+						<h:outputLabel for="password" value="Mot de passe:" />
+						<p:password id="password" value="#{aMB.admin.mdp}" required="true"
+							label="password" />
 
-					<f:facet name="footer">
-						<p:commandButton value="Se connecter en tant qu'administrateur" update="growl"
-							action="#{aMB.seConnecter}" ajax="false"
-							oncomplete="handleLoginRequest(xhr, status, args)" />
-					</f:facet>
-				</h:panelGrid>
+						<f:facet name="footer">
+							<p:commandButton value="Se connecter en tant qu'administrateur"
+								update="growl" action="#{aMB.seConnecter}" ajax="false"
+								oncomplete="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</div>
 			</p:dialog>
 		</h:form>
 
@@ -46,9 +51,9 @@
 						times : 10
 					}, 100);
 				} else {
-		            PF('dlg').hide();
-		            $('#loginLink').fadeOut();
-		        }
+					PF('dlg').hide();
+					$('#loginLink').fadeOut();
+				}
 			}
 		</script>
 	</ui:composition>

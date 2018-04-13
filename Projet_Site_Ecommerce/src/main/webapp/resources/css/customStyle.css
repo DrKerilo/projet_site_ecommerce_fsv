@@ -21,3 +21,7 @@ body{
 	margin:auto;
 	width:42px;
 }
+
+.ui-dialog{
+     position: absolute !important;
+}
