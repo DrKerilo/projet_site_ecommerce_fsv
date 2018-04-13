@@ -20,6 +20,7 @@
 				<p:layoutUnit position="west" size="300">
 					<div style="padding: 10px">
 						<h:form>
+							<h:panelGrid columns="1" cellpadding="5">
 							<p:outputLabel for="categ" value="Afficher les produits de:" />
 							<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
 								style="width:125px">
@@ -27,14 +28,12 @@
 								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
 									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
 							</p:selectOneMenu>
-							<br />
 							<h:outputText value="#{categ.id}" />
-
 							<p:commandButton value="Chercher" action="#{pMB.prodByCat}" />
-							<br />
 							<h:graphicImage library="images"
 								name="trump administration GIF-source.gif"
 								style="width:100%;height:auto;margin-top:100px" />
+								</h:panelGrid>
 						</h:form>
 					</div>
 				</p:layoutUnit>

@@ -20,19 +20,21 @@
 				<p:layoutUnit position="west" size="300">
 					<div style="padding: 10px">
 						<h:form>
-							<p:outputLabel for="categ" value="Afficher les produits de:" />
-							<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
-								style="width:125px">
-								<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
-								<f:selectItems value="#{sessionScope.listeCat}" var="categ"
-									itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
-							</p:selectOneMenu>
-							<h:outputText value="#{categ.id}" />
-							<br/>
-							<p:commandButton value="Chercher" action="#{pMB.prodByCat}"
-								update="@all" />
-							<br/>
-							<h:graphicImage library="images" name="trump administration GIF-source.gif" style="width:100%;height:auto;margin-top:100px" />
+							<h:panelGrid columns="1" cellpadding="5">
+								<p:outputLabel for="categ" value="Afficher les produits de:" />
+								<p:selectOneMenu id="categ" value="#{pMB.cat.id}"
+									style="width:125px">
+									<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
+									<f:selectItems value="#{sessionScope.listeCat}" var="categ"
+										itemLabel="#{categ.nomCategorie}" itemValue="#{categ.id}" />
+								</p:selectOneMenu>
+								<h:outputText value="#{categ.id}" />
+								<p:commandButton value="Chercher" action="#{pMB.prodByCat}"
+									update="@all" />
+								<h:graphicImage library="images"
+									name="trump administration GIF-source.gif"
+									style="width:100%;height:auto;margin-top:100px" />
+							</h:panelGrid>
 						</h:form>
 					</div>
 				</p:layoutUnit>
@@ -145,7 +147,8 @@
 								<p:panelGrid columns="2" rendered="#{not empty pMB.produit}"
 									columnClasses="label,value">
 									<f:facet name="header">
-										<img src="#{pMB.produit.image}" style="width:350px;height:auto"/>
+										<img src="#{pMB.produit.image}"
+											style="width: 350px; height: auto" />
 									</f:facet>
 
 									<h:outputText value="#" />
