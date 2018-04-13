@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -49,6 +50,11 @@ public class LigneCommandeManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		List<LigneCommande> liste = lCommandeService.getLigneCommande();
+		this.maSession.setAttribute("panier", liste);
+		
+		total = lCommandeService.getTotal(liste);
 	}
 
 	// Getters et setters
@@ -80,8 +86,8 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	// Méthodes metiers
 	public String updateLC(){
-		System.out.println(lc);
-		System.out.println(pr);
+		System.out.println("Ligne commande " + lc);
+		System.out.println("Produit " + pr);
 		
 		int verif = lCommandeService.updateLC(lc, pr);
 		
@@ -94,12 +100,12 @@ public class LigneCommandeManagedBean implements Serializable {
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
 		}
+		
+//		lc.setQuantite(0);
 		return "clientProduitsParCat";
 	}
 	
 	public String updateLCPanier(){
-		System.out.println(lc);
-		System.out.println(pr);
 		
 		int verif = lCommandeService.updateLC(lc, pr);
 		
@@ -113,6 +119,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
 		}
+		lc.setQuantite(0);
 		return "panier";
 	}
 	
@@ -132,6 +139,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			
 			total = lCommandeService.getTotal(liste);
 		}
+		lc.setQuantite(0);
 		
 		return "panier";
 

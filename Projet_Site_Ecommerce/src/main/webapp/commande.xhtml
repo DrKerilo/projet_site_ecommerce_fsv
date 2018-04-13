@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page login</title>
+	<title>Commande validée</title>
 </h:head>
 
 <h:body>
@@ -14,13 +14,17 @@
 	<ui:composition template="/resources/templates/layoutfront.xhtml">
 		<!-- Modifier la partie corps -->
 		<ui:define name="bodyFront">
-	
-	
-	La commande est validée
 
-Vous recevrez un email de confirmation pour la commande
 
-<h:link value="Retourner à la page d'accueil" outcome="accueil.xhtml" />
+			<h2 style="color: white; text-align: center;)">La commande est
+				validée</h2>
+
+			<h2 style="color: white; text-align:center;)">Vous recevrez un
+				email de confirmation pour la commande</h2>
+
+			<br />
+
+			<b><h:link value="Retourner à la page d'accueil" outcome="accueil.xhtml" /></b>
 
 
 		</ui:define>
