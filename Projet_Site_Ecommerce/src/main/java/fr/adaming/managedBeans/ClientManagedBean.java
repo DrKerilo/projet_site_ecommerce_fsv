@@ -30,6 +30,18 @@ public class ClientManagedBean implements Serializable{
 	ILigneCommandeService lcService;
 	
 	
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+	public void setLcService(ILigneCommandeService lcService) {
+		this.lcService = lcService;
+	}
+
 	// Attributs
 	HttpSession maSession;
 	private Client client;
@@ -78,8 +90,10 @@ public class ClientManagedBean implements Serializable{
 			System.out.println(liste);
 			this.commande = commandeService.finaliserCommande(liste, clAjout);
 			
+			double total = lcService.getTotal(liste);
+			
 			// TODO inserer la fonction PDF
-//			commandeService.bilanPDF(commande, total);
+			commandeService.bilanPDF(commande, total);
 			
 //			lcService.viderLC();
 			
