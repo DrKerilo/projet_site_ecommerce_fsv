@@ -47,20 +47,21 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 
 				// Mettre à jour plutot que d'avoir un doublon
 				if (lc.getQuantite() <= 0) {
-					System.out.println("Je supprime");
 					return lcDao.supprimerLC(lc2);
 				} else {
-					System.out.println("Je modifie le panier");
 					// Le produit est présent dans le panier - modifier
-					lc.setPrix(produit.getPrix() * lc.getQuantite());
+					// Arrondir à deux chiffres
+					double prix = (double) ((int) (produit.getPrix() * lc.getQuantite() * 100)) / 100;
+					lc.setPrix(prix);
 
 					return lcDao.modifierLC(lc);
 				}
 				
 			} else if (lc.getQuantite() != 0) {
-				System.out.println("J'ajoute au panier");
 				// Le produit n'existe pas encore dans le panier
-				lc.setPrix(produit.getPrix() * lc.getQuantite());
+				// Arrondir à deux chiffres
+				double prix = (double) ((int) (produit.getPrix() * lc.getQuantite() * 100)) / 100;
+				lc.setPrix(prix);
 				lc = lcDao.ajouterLC(lc);
 				
 				if(lc != null){
@@ -93,11 +94,13 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	public double getTotal(List<LigneCommande> list) {
 		double somme = 0;
 		
-		for(LigneCommande lc:list){
-			somme = somme + lc.getPrix();
-			System.out.println(somme + " " + lc.getPrix());
+		if(list != null){
+			for(LigneCommande lc:list){
+				somme = somme + lc.getPrix();
+				System.out.println(somme + " " + lc.getPrix());
+			}
+			somme = (double) ((int) (somme * 100)) / 100;
 		}
-		
 		return somme;
 	}
 

@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page login</title>
+	<title>Mon panier</title>
 </h:head>
 
 <h:body>
@@ -42,7 +42,8 @@
 					</p:column>
 
 					<p:column headerText="Operations">
-						<h:commandLink value="Modifier" action="#{lcMB.updateLCPanier}" update="@all">
+						<h:commandLink value="Modifier" action="#{lcMB.updateLCPanier}"
+							update="@all">
 							<f:setPropertyActionListener value="#{pa.produit.id}"
 								target="#{lcMB.pr.id}" />
 							<f:setPropertyActionListener value="#{pa.quantite}"
@@ -60,9 +61,15 @@
 				</p:dataTable>
 
 			</h:form>
-			<h:inputText readonly = "true" style = "color:white; text-align: right" value = "Total : #{lcMB.total}€" />
+			<div style="text-align: right">
+				<h:outputText style="color:white; text-align: right"
+					value="Total : #{lcMB.total}€" />
+			</div>
 
-			<h:link style = "color:white" value="Finaliser la commande" outcome="ajoutClient.xhtml" />
+			<br />
+
+			<h:link style="color:white" value="Finaliser la commande"
+				outcome="ajoutClient.xhtml" />
 
 
 		</ui:define>

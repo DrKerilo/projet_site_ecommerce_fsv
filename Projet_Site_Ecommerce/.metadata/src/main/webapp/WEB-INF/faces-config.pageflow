@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15232813774640" configfile="/Projet_Site_Ecommerce/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15232813774640" configfile="/Projet_Site_Ecommerce/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="espaceadmin.xhtml" x="338" y="178" id="pf15236090926780" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" outlinks="pf15236090926781 pf15236090926782" inlinks="pf15236090926782 pf15236090926783" path="espaceadmin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="produitsadmin.xhtml" x="122" y="178" id="pf15236090926794" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf15236090926795 pf15236090926783" inlinks="pf15236090926781 pf15236090926795" path="produitsadmin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="clientProduitsParCat.xhtml" id="pf15236090926796" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" outlinks="pf15236090926797 pf15236090926798" inlinks="pf15236090926797 pf15236090926798" path="clientProduitsParCat.xhtml"/>
+  <links id="pf15236090926781" target="pf15236090926794" source="pf15236090926780" outcome="success" fromaction="#{pMB.prodByCat}"/>
+  <links id="pf15236090926783" target="pf15236090926780" source="pf15236090926794" outcome="fail"/>
+  <links id="pf15236090926782" target="pf15236090926780" source="pf15236090926780" outcome="fail">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf15236090926795" target="pf15236090926794" source="pf15236090926794" outcome="success" fromaction="#{pMB.prodByCat}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf15236090926797" target="pf15236090926796" source="pf15236090926796" outcome="success" fromaction="#{pMB.prodByCat}"/>
+  <links id="pf15236090926798" target="pf15236090926796" source="pf15236090926796" outcome="fail"/>
+</pageflow:Pageflow>

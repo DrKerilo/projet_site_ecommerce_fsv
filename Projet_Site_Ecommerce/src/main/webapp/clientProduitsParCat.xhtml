@@ -6,12 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page Client</title>
+	<title>Produits</title>
 </h:head>
-
-
-
-
 
 <h:body>
 
@@ -26,11 +22,13 @@
 
 			<h:form>
 				<h:panelGrid columns="2">
-			 Numéro catégorie : <h:inputText value="#{pMB.cat.id}" />
+			 <p style = "color:white"> Numéro catégorie : <h:inputText value="#{pMB.cat.id}" /> </p>
 					<h:commandButton action="#{pMB.prodByCat}" value="Rechercher" />
 
 				</h:panelGrid>
 			</h:form>
+			
+			<br/>
 
 
 			<h:form>
@@ -49,7 +47,7 @@
 					</p:column>
 
 					<p:column headerText="Quantité">
-						<h:inputText value="#{produit.quantite}" />
+						<h:inputText value="#{lcMB.lc.quantite}" />
 					</p:column>
 
 					<p:column headerText="Prix">
@@ -60,10 +58,10 @@
 				Détails article | 
 								<h:commandLink value="Modifier le panier"
 							action="#{lcMB.updateLC}">
+							<f:setPropertyActionListener value="#{lcMB.lc.quantite}"
+								target="#{lcMB.lc.quantite}" />
 							<f:setPropertyActionListener value="#{produit.id}"
 								target="#{lcMB.pr.id}" />
-							<f:setPropertyActionListener value="#{produit.quantite}"
-								target="#{lcMB.lc.quantite}" />
 						</h:commandLink>
 
 
